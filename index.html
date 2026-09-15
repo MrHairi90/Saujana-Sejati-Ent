@@ -7,9 +7,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Saujana Sejati Ent">
 <title>Saujana Sejati Ent | Custom Cabinet & Interior</title>
-<h3>AKSESORI TAMBAHAN</h3>
-<div id="accessoryList"></div>
-<button type="button" class="btn" onclick="addAccessory()">+ Tambah Aksesori</button>
 <style>
 :root{--red:#e50914;--black:#111;--dark:#191b1d;--line:#e6e6e6;--soft:#f6f6f6;--muted:#666}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--black);background:#fff;font-family:Arial,Helvetica,sans-serif}
@@ -29,10 +26,15 @@ footer{margin-top:35px;background:#f7f7f7;border-top:1px solid #ddd}.footer-inne
 @media(max-width:800px){.top{padding:8px 12px}.logo{width:245px;height:72px}.slogan{display:none}.hero{min-height:520px;background:linear-gradient(90deg,rgba(255,255,255,.98),rgba(255,255,255,.76)),url('kabinet-dapur-01.jpg') center/cover}.hero:before{left:65%;height:100%}.hero-copy{padding:32px 24px;max-width:600px}.hero p{font-size:18px}.cat-grid,.catalog-grid{grid-template-columns:1fr 1fr}.strengths{grid-template-columns:repeat(4,1fr)}.strength{padding:14px 5px}.strength b{font-size:10px}.footer-inner{grid-template-columns:1fr}.footer-contact{text-align:left}}
 @media(max-width:520px){.wrap{padding:12px}.logo{width:210px;height:62px}.hero{border-radius:0 0 18px 18px}.hero h1{font-size:43px}.benefits .benefit{padding:13px 4px}.benefit b{font-size:10px}.benefit small{font-size:9px}.cat-grid,.catalog-grid{gap:9px}.cat{height:175px}.cat-info h3{font-size:16px}.cat-info .muted{font-size:10px}.arrow{width:34px;height:34px;font-size:18px}.promo{display:block}.strengths{grid-template-columns:repeat(2,1fr)}.strength:nth-child(2){border-right:0}.grid{grid-template-columns:1fr}.product img{height:175px}.pinfo{padding:10px}.pinfo h3{font-size:15px}.pactions button{font-size:10px;padding:8px}}
 </style>
-<style id="quote-fix-style">
-#accessoryList{margin:10px 0}.accessory-row{display:grid;grid-template-columns:1.5fr .8fr .6fr auto;gap:10px;align-items:end;margin:12px 0}
-.accessory-row select,.accessory-row input{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccc;border-radius:8px}
-@media(max-width:650px){.accessory-row{grid-template-columns:1fr}.accessory-row button{width:100%}}
+<style id="accessory-style">
+.access-row input,.access-row select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccc;border-radius:8px}
+@media(max-width:700px){.access-row{grid-template-columns:1fr!important}}
+</style><style id="quotation-layout-final">
+#accessories{width:100%}
+.access-row{grid-template-columns:1.5fr .8fr .6fr auto;align-items:end}
+.access-row input,.access-row select{width:100%;box-sizing:border-box;padding:12px;border:1px solid #ccc;border-radius:8px}
+@media(max-width:700px){.access-row{grid-template-columns:1fr!important}}
+@media print{nav,header,footer,.quote-actions{display:none!important}}
 </style></head>
 <body>
 <header><div class="top"><img class="logo" src="logo-saujana-sejati.jpg" alt="Saujana Sejati Enterprise"><div class="slogan">Rumah Cantik<br><span>Bermula Di Sini</span><small>KUALITI • REKA BENTUK • KEPERCAYAAN</small></div></div>
@@ -58,15 +60,51 @@ footer{margin-top:35px;background:#f7f7f7;border-top:1px solid #ddd}.footer-inne
 <section id="catalog" class="screen"><div class="title"><div><h2>Katalog Projek</h2><div class="muted">Contoh hasil kerja Saujana Sejati Ent</div></div><button class="btn red" onclick="wa('Salam, saya berminat dengan design katalog Saujana Sejati Ent.')">Tanya Design</button></div>
 <div class="filters"><button class="active" onclick="filterCatalog('Semua',this)">Semua</button><button onclick="filterCatalog('Kabinet Dapur',this)">Kabinet Dapur</button><button onclick="filterCatalog('Rak TV',this)">Rak TV</button><button onclick="filterCatalog('Almari Bilik',this)">Almari Bilik</button><button onclick="filterCatalog('Panel Dinding',this)">Panel Dinding</button><button onclick="filterCatalog('Bawah Tangga',this)">Bawah Tangga</button></div><div id="catalogGrid" class="catalog-grid"></div></section>
 
-<section id="quote" class="screen"><h2>Quotation Kabinet</h2><p class="muted">Kiraan kabinet bawah & atas menggunakan kaki lari. Harga bawah dan atas boleh berbeza.</p><div class="card">
-<label>Nama Customer</label><input id="qn" placeholder="Nama"><label>No. Telefon</label><input id="qp" placeholder="01x-xxxxxxx">
-<h3 style="color:#e50914">KABINET BAWAH</h3><div class="grid"><div><label>Panjang (kaki)</label><input id="ql" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qr" type="number" value="350" oninput="calc()"></div></div><p>Kabinet bawah: <b id="lowerTotal">RM 3,500</b></p>
-<h3 style="color:#e50914">KABINET ATAS</h3><div class="grid"><div><label>Panjang (kaki)</label><input id="qu" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qur" type="number" value="250" oninput="calc()"></div></div><p>Kabinet atas: <b id="upperTotal">RM 2,500</b></p>
-<h3 style="color:#e50914">AKSESORI TAMBAHAN</h3><div id="accessories"><div class="access-row grid" style="margin-bottom:10px"><div><label>Aksesori</label><select class="acc-name"><option>Rak Pinggan</option><option>Rak Botol / Seasoning</option><option>Tong Sampah Built-in</option><option>Pull-out Basket</option><option>Magic Corner</option><option>Lift-up Cabinet</option><option>Lampu LED</option><option>Socket / Aksesori Elektrik</option><option>Aksesori Lain</option></select></div><div><label>Harga (RM)</label><input class="acc-price" type="number" value="0" oninput="calc()"></div></div></div>
-<button class="btn outline" type="button" onclick="addAccessory()">+ Tambah Aksesori</button>
-<div class="quote-box"><div>JUMLAH AKSESORI</div><div id="accTotal">RM 0</div><div class="quote-total" id="total">RM 6,000</div><label>Deposit (RM)</label><input id="qd" type="number" value="0" oninput="calc()"><p>Baki: <b id="balance">RM 6,000</b></p></div>
-<button class="btn red" onclick="saveQuote()">Simpan Projek</button> <button class="btn outline" onclick="printQuote()">Cetak / PDF</button>
-</div></section>
+<section id="quote" class="screen">
+  <h2>Quotation Kabinet</h2>
+  <div class="card">
+    <label>Nama Customer</label>
+    <input id="qn" placeholder="Nama">
+    <label>No. Telefon</label>
+    <input id="qp" placeholder="01x-xxxxxxx">
+
+    <div class="grid">
+      <div>
+        <h3 style="color:#e50914">KABINET BAWAH</h3>
+        <label>Sekaki selari</label>
+        <input id="ql" type="number" value="10" min="0" step="0.1">
+        <label>Harga / sekaki (RM)</label>
+        <input id="qr" type="number" value="350" min="0" step="1">
+        <p>Kabinet bawah: <b id="lowerTotal">RM 3,500</b></p>
+      </div>
+
+      <div>
+        <h3 style="color:#e50914">KABINET ATAS</h3>
+        <label>Sekaki selari</label>
+        <input id="qu" type="number" value="10" min="0" step="0.1">
+        <label>Harga / sekaki (RM)</label>
+        <input id="qur" type="number" value="250" min="0" step="1">
+        <p>Kabinet atas: <b id="upperTotal">RM 2,500</b></p>
+      </div>
+    </div>
+
+    <h3 style="color:#e50914;margin-top:28px">AKSESORI TAMBAHAN</h3>
+    <div id="accessories"></div>
+    <button type="button" class="btn outline" onclick="addAccessory()">+ Tambah Aksesori</button>
+
+    <div class="quote-box" style="margin-top:20px">
+      <p>Jumlah kabinet: <b id="cabinetTotal">RM 6,000</b></p>
+      <p>Jumlah aksesori: <b id="accTotal">RM 0</b></p>
+      <div class="quote-total" id="total">RM 6,000</div>
+      <label>Deposit (RM)</label>
+      <input id="qd" type="number" value="0" min="0">
+      <p>Baki: <b id="balance">RM 6,000</b></p>
+    </div>
+
+    <button type="button" class="btn red" onclick="saveQuote()">Simpan Projek</button>
+    <button type="button" class="btn outline" onclick="printQuote()">Cetak / PDF</button>
+  </div>
+</section>
 <section id="projects" class="screen"><h2>Projek Customer</h2><div id="projectList"></div></section>
 <section id="dashboard" class="screen"><h2>Dashboard Admin</h2><div class="row"><div class="card stat">Projek<div class="big" id="sproj">0</div></div><div class="card stat">Jualan<div class="big" id="ssales">RM 0</div></div><div class="card stat">Deposit<div class="big" id="sdep">RM 0</div></div></div><div class="card"><b>Workflow</b><p>LEAD → QUOTATION → DEPOSIT → PRODUCTION → INSTALLATION → COMPLETED</p></div></section>
 <section id="print" class="screen"><div class="card"><h1>SAUJANA SEJATI ENT</h1><h2>QUOTATION</h2><div id="pq"></div></div></section>
@@ -75,91 +113,60 @@ footer{margin-top:35px;background:#f7f7f7;border-top:1px solid #ddd}.footer-inne
 <footer><div class="footer-inner"><img class="footer-logo" src="logo-saujana-sejati.jpg"><div class="footer-slogan">“Rumah Lebih Selesa,<br>Hidup Lebih Bahagia”</div><div class="footer-contact">KUALITI • REKA BENTUK • KEPERCAYAAN<br><br><button class="btn green" onclick="wa('Salam Saujana Sejati Ent, saya ingin bertanya tentang kabinet custom.')">WhatsApp Sekarang ›</button></div></div></footer>
 
 <script>
-const K='saujana_projects';let projects=JSON.parse(localStorage.getItem(K)||'[]');const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));let n=$('n-'+id);if(n)n.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')render()}
-function money(n){return'RM '+Math.round(n||0).toLocaleString('ms-MY')}
-function calc(){let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0),t=lower+upper+acc,d=+$('qd').value||0;$('lowerTotal').textContent=money(lower);$('upperTotal').textContent=money(upper);$('accTotal').textContent=money(acc);$('total').textContent=money(t);$('balance').textContent=money(t-d)}
-function addAccessory(){let x=document.createElement('div');x.className='access-row grid';x.style.marginBottom='10px';x.innerHTML=`<div><label>Aksesori</label><select class="acc-name"><option>Rak Pinggan</option><option>Rak Botol / Seasoning</option><option>Tong Sampah Built-in</option><option>Pull-out Basket</option><option>Magic Corner</option><option>Lift-up Cabinet</option><option>Lampu LED</option><option>Socket / Aksesori Elektrik</option><option>Aksesori Lain</option></select></div><div><label>Harga (RM)</label><input class="acc-price" type="number" value="0" oninput="calc()"></div>`;$('accessories').appendChild(x)}
-function wa(t){window.open('https://wa.me/601113232186?text='+encodeURIComponent(t),'_blank')}
-function saveQuote(){let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0),t=lower+upper+acc,d=+$('qd').value||0;projects.unshift({name:$('qn').value||'Customer',phone:$('qp').value||'',type:'Kabinet Bawah + Kabinet Atas + Aksesori',total:t,deposit:d,status:'QUOTATION'});localStorage.setItem(K,JSON.stringify(projects));render();show('projects')}
-function goCategory(cat){show('catalog');setTimeout(()=>{let b=[...document.querySelectorAll('.filters button')].find(x=>x.textContent.trim()===cat);filterCatalog(cat,b)},50)}
-const catalogItems=[
-['Kabinet Dapur','kabinet-dapur-01.jpg','Kabinet Dapur Modern','Rekaan custom dengan kemasan moden.'],['Kabinet Dapur','kabinet-dapur-02.jpg','Kabinet Dapur Biru','Susun atur kemas dan praktikal.'],['Rak TV','rak-tv-01.jpg','Rak TV Hitam','TV wall custom dan kemas.'],['Rak TV','rak-tv-02.jpg','Feature Wall Marble','Panel TV marble premium.'],['Rak TV','rak-tv-03.jpg','Feature Wall LED','Pencahayaan warm LED.'],['Rak TV','rak-tv-04.jpg','Rak TV Minimalis','Rekaan minimalis dua tona.'],['Panel Dinding','panel-dinding-01.jpg','Panel Dinding Dekoratif','Slat wall dan panel dekorasi.'],['Almari Bilik','almari-bilik-01.jpg','Almari Bilik Custom','Built-in dengan ruang maksimum.'],['Kabinet Dapur','kabinet-dapur-03.jpg','Kabinet Dapur Kayu Putih','Gabungan kayu dan putih.'],['Kabinet Dapur','kabinet-dapur-04.jpg','Kabinet Dapur Putih','Rekaan cerah dengan island.'],['Kabinet Dapur','kabinet-dapur-05.jpg','Kabinet Dapur Hitam Kayu','Hitam dan tona kayu.'],['Rak TV','rak-display-01.jpg','Rak Display Custom','Rak simpanan dua tona.'],['Kabinet Dapur','kabinet-dapur-06.jpg','Kabinet Dapur Hitam Premium','Kemasan hitam premium.'],['Kabinet Dapur','kabinet-dapur-07.jpg','Kabinet Dapur Putih Marble','Countertop corak marble.'],['Bawah Tangga','bawah-tangga-01.jpg','Kabinet Bawah Tangga','Maksimumkan ruang bawah tangga.'],['Kabinet Dapur','kabinet-dapur-08.jpg','Kabinet Dapur Hijau','Kemasan hijau dan putih.'],['Almari Bilik','almari-bilik-02.jpg','Almari Bilik Full Height','Almari penuh dinding.'],['Almari Bilik','almari-bilik-03.jpg','Almari Sliding Modern','Sliding dua tona.']
+const K='saujana_projects';
+let projects=JSON.parse(localStorage.getItem(K)||'[]');
+const $=id=>document.getElementById(id);
+const accessoryOptions=[
+ ['Rak Pinggan',180],['Rak Botol / Seasoning',120],['Tong Sampah Built-in',250],
+ ['Pull-out Basket',220],['Magic Corner',650],['Lift-up Cabinet',450],
+ ['Lampu LED',150],['Socket / Aksesori Elektrik',100],['Aksesori Lain',0]
 ];
-function filterCatalog(cat,btn){document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');let a=cat==='Semua'?catalogItems:catalogItems.filter(x=>x[0]===cat);$('catalogGrid').innerHTML=a.map(x=>`<article class="product"><img src="${x[1]}" onclick="openImg('${x[1]}','${x[2]}')"><div class="pinfo"><div class="muted">${x[0]}</div><h3>${x[2]}</h3><p>${x[3]}</p><div class="pactions"><button class="outline" onclick="openImg('${x[1]}','${x[2]}')">Lihat</button><button class="red" onclick="wa('Salam, saya berminat dengan ${x[2]}. Boleh dapatkan quotation?')">Quotation</button></div></div></article>`).join('')}
-function openImg(img,name){let w=window.open('','_blank');if(w){w.document.write(`<title>${name}</title><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${img}" style="max-width:100%;max-height:100vh;object-fit:contain">
-<script id="quotation-calc">
-const accessoryOptions = [
-  ["Rak pinggan",180],["Rak botol / seasoning",120],["Tong sampah built-in",250],
-  ["Pull-out basket",220],["Magic corner",650],["Lift-up cabinet",450],
-  ["Lampu LED",150],["Socket / aksesori elektrik",100],["Aksesori lain",0]
-];
-function money(n){return "RM "+Number(n||0).toLocaleString("en-MY",{minimumFractionDigits:0,maximumFractionDigits:2});}
-function qv(id){return parseFloat(document.getElementById(id)?.value)||0;}
-function updateQuote(){
-  const lower=qv("lowerFt")*qv("lowerRate"), upper=qv("upperFt")*qv("upperRate");
-  let acc=0;
-  document.querySelectorAll(".accessory-row").forEach(r=>acc+=(parseFloat(r.querySelector(".acc-price")?.value)||0)*(parseFloat(r.querySelector(".acc-qty")?.value)||0));
-  const total=lower+upper+acc, dep=qv("deposit");
-  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=money(v)};
-  set("lowerTotal",lower);set("upperTotal",upper);set("cabinetTotal",lower+upper);set("accessoryTotal",acc);set("grandTotal",total);set("balance",Math.max(0,total-dep));
+function money(n){return 'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calc(){
+ const lower=(+$('ql').value||0)*(+$('qr').value||0);
+ const upper=(+$('qu').value||0)*(+$('qur').value||0);
+ let acc=0;
+ document.querySelectorAll('.access-row').forEach(r=>{
+   acc+=(+(r.querySelector('.acc-price')?.value)||0)*(+(r.querySelector('.acc-qty')?.value)||0);
+ });
+ const total=lower+upper+acc, dep=+$('qd').value||0;
+ $('lowerTotal').textContent=money(lower);
+ $('upperTotal').textContent=money(upper);
+ $('cabinetTotal').textContent=money(lower+upper);
+ $('accTotal').textContent=money(acc);
+ $('total').textContent=money(total);
+ $('balance').textContent=money(Math.max(0,total-dep));
 }
 function addAccessory(){
-  const wrap=document.getElementById("accessoryList"); if(!wrap)return;
-  const r=document.createElement("div"); r.className="accessory-row";
-  r.innerHTML=`<div><label>Aksesori</label><select class="acc-name">${accessoryOptions.map(x=>`<option data-price="${x[1]}">${x[0]}</option>`).join("")}</select></div>
-  <div><label>Harga (RM)</label><input class="acc-price" type="number" min="0" value="0"></div>
-  <div><label>Kuantiti</label><input class="acc-qty" type="number" min="1" value="1"></div>
-  <button type="button" class="btn" onclick="this.closest('.accessory-row').remove();updateQuote()">Buang</button>`;
-  wrap.appendChild(r);
-  const s=r.querySelector(".acc-name"), p=r.querySelector(".acc-price");
-  s.addEventListener("change",()=>{p.value=s.options[s.selectedIndex].dataset.price||0;updateQuote()});
-  p.value=s.options[0].dataset.price; r.querySelector(".acc-qty").addEventListener("input",updateQuote); p.addEventListener("input",updateQuote); updateQuote();
+ const wrap=$('accessories');
+ const row=document.createElement('div');
+ row.className='access-row grid';
+ row.style.marginBottom='12px';
+ row.innerHTML=`<div><label>Aksesori</label><select class="acc-name">${accessoryOptions.map(x=>`<option data-price="${x[1]}">${x[0]}</option>`).join('')}</select></div>
+ <div><label>Harga (RM)</label><input class="acc-price" type="number" min="0" value="0"></div>
+ <div><label>Kuantiti</label><input class="acc-qty" type="number" min="1" value="1"></div>
+ <div><button type="button" class="btn outline" onclick="this.closest('.access-row').remove();calc()">Buang</button></div>`;
+ wrap.appendChild(row);
+ const sel=row.querySelector('.acc-name'), price=row.querySelector('.acc-price');
+ price.value=sel.options[0].dataset.price||0;
+ sel.addEventListener('change',()=>{price.value=sel.options[sel.selectedIndex].dataset.price||0;calc();});
+ row.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));
+ calc();
 }
-document.addEventListener("DOMContentLoaded",()=>{
-  ["lowerFt","lowerRate","upperFt","upperRate","deposit"].forEach(id=>document.getElementById(id)?.addEventListener("input",updateQuote));
-  if(document.getElementById("accessoryList") && !document.querySelector(".accessory-row")) addAccessory();
-  updateQuote();
+function saveQuote(){
+ const lower=(+$('ql').value||0)*(+$('qr').value||0);
+ const upper=(+$('qu').value||0)*(+$('qur').value||0);
+ const acc=[...document.querySelectorAll('.access-row')].reduce((s,r)=>s+(+(r.querySelector('.acc-price')?.value)||0)*(+(r.querySelector('.acc-qty')?.value)||0),0);
+ const total=lower+upper+acc, dep=+$('qd').value||0;
+ projects.unshift({name:$('qn').value||'Customer',phone:$('qp').value||'',type:'Kabinet Bawah + Kabinet Atas + Aksesori',total,deposit:dep,status:'QUOTATION'});
+ localStorage.setItem(K,JSON.stringify(projects));
+ alert('Quotation berjaya disimpan.');
+}
+function printQuote(){window.print();}
+document.addEventListener('DOMContentLoaded',()=>{
+ ['ql','qr','qu','qur','qd'].forEach(id=>$(id)?.addEventListener('input',calc));
+ addAccessory();
+ calc();
 });
 </script>
-
-</body>`);w.document.close()}}
-filterCatalog('Semua');calc();render();
-</script>
-
-<script id="quotation-calc">
-const accessoryOptions = [
-  ["Rak pinggan",180],["Rak botol / seasoning",120],["Tong sampah built-in",250],
-  ["Pull-out basket",220],["Magic corner",650],["Lift-up cabinet",450],
-  ["Lampu LED",150],["Socket / aksesori elektrik",100],["Aksesori lain",0]
-];
-function money(n){return "RM "+Number(n||0).toLocaleString("en-MY",{minimumFractionDigits:0,maximumFractionDigits:2});}
-function qv(id){return parseFloat(document.getElementById(id)?.value)||0;}
-function updateQuote(){
-  const lower=qv("lowerFt")*qv("lowerRate"), upper=qv("upperFt")*qv("upperRate");
-  let acc=0;
-  document.querySelectorAll(".accessory-row").forEach(r=>acc+=(parseFloat(r.querySelector(".acc-price")?.value)||0)*(parseFloat(r.querySelector(".acc-qty")?.value)||0));
-  const total=lower+upper+acc, dep=qv("deposit");
-  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=money(v)};
-  set("lowerTotal",lower);set("upperTotal",upper);set("cabinetTotal",lower+upper);set("accessoryTotal",acc);set("grandTotal",total);set("balance",Math.max(0,total-dep));
-}
-function addAccessory(){
-  const wrap=document.getElementById("accessoryList"); if(!wrap)return;
-  const r=document.createElement("div"); r.className="accessory-row";
-  r.innerHTML=`<div><label>Aksesori</label><select class="acc-name">${accessoryOptions.map(x=>`<option data-price="${x[1]}">${x[0]}</option>`).join("")}</select></div>
-  <div><label>Harga (RM)</label><input class="acc-price" type="number" min="0" value="0"></div>
-  <div><label>Kuantiti</label><input class="acc-qty" type="number" min="1" value="1"></div>
-  <button type="button" class="btn" onclick="this.closest('.accessory-row').remove();updateQuote()">Buang</button>`;
-  wrap.appendChild(r);
-  const s=r.querySelector(".acc-name"), p=r.querySelector(".acc-price");
-  s.addEventListener("change",()=>{p.value=s.options[s.selectedIndex].dataset.price||0;updateQuote()});
-  p.value=s.options[0].dataset.price; r.querySelector(".acc-qty").addEventListener("input",updateQuote); p.addEventListener("input",updateQuote); updateQuote();
-}
-document.addEventListener("DOMContentLoaded",()=>{
-  ["lowerFt","lowerRate","upperFt","upperRate","deposit"].forEach(id=>document.getElementById(id)?.addEventListener("input",updateQuote));
-  if(document.getElementById("accessoryList") && !document.querySelector(".accessory-row")) addAccessory();
-  updateQuote();
-});
-</script>
-
 </body></html>

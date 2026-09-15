@@ -51,13 +51,28 @@ footer{margin-top:35px;background:#f7f7f7;border-top:1px solid #ddd}.footer-inne
 <section id="catalog" class="screen"><div class="title"><div><h2>Katalog Projek</h2><div class="muted">Contoh hasil kerja Saujana Sejati Ent</div></div><button class="btn red" onclick="wa('Salam, saya berminat dengan design katalog Saujana Sejati Ent.')">Tanya Design</button></div>
 <div class="filters"><button class="active" onclick="filterCatalog('Semua',this)">Semua</button><button onclick="filterCatalog('Kabinet Dapur',this)">Kabinet Dapur</button><button onclick="filterCatalog('Rak TV',this)">Rak TV</button><button onclick="filterCatalog('Almari Bilik',this)">Almari Bilik</button><button onclick="filterCatalog('Panel Dinding',this)">Panel Dinding</button><button onclick="filterCatalog('Bawah Tangga',this)">Bawah Tangga</button></div><div id="catalogGrid" class="catalog-grid"></div></section>
 
-<section id="quote" class="screen"><h2>Quotation Kabinet</h2><p class="muted">Kiraan kabinet bawah & atas menggunakan kaki lari. Harga bawah dan atas boleh berbeza.</p><div class="card">
+<section id="quote" class="screen"><h2>Quotation Kabinet</h2><div class="card">
 <label>Nama Customer</label><input id="qn" placeholder="Nama"><label>No. Telefon</label><input id="qp" placeholder="01x-xxxxxxx">
-<h3 style="color:#e50914">KABINET BAWAH</h3><div class="grid"><div><label>Panjang (kaki)</label><input id="ql" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qr" type="number" value="350" oninput="calc()"></div></div><p>Kabinet bawah: <b id="lowerTotal">RM 3,500</b></p>
-<h3 style="color:#e50914">KABINET ATAS</h3><div class="grid"><div><label>Panjang (kaki)</label><input id="qu" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qur" type="number" value="250" oninput="calc()"></div></div><p>Kabinet atas: <b id="upperTotal">RM 2,500</b></p>
-<h3 style="color:#e50914">AKSESORI TAMBAHAN</h3><div id="accessories"><div class="access-row grid" style="margin-bottom:10px"><div><label>Aksesori</label><select class="acc-name"><option>Rak Pinggan</option><option>Rak Botol / Seasoning</option><option>Tong Sampah Built-in</option><option>Pull-out Basket</option><option>Magic Corner</option><option>Lift-up Cabinet</option><option>Lampu LED</option><option>Socket / Aksesori Elektrik</option><option>Aksesori Lain</option></select></div><div><label>Harga (RM)</label><input class="acc-price" type="number" value="0" oninput="calc()"></div></div></div>
+
+<h3 style="color:#e50914">KABINET BAWAH</h3>
+<div class="grid"><div><label>Selari (kaki lari)</label><input id="ql" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qr" type="number" value="350" oninput="calc()"></div></div>
+<div class="muted">Selari × harga/kaki lari</div><p>Kabinet bawah: <b id="lowerTotal">RM 3,500</b></p>
+
+<h3 style="color:#e50914">KABINET ATAS</h3>
+<div class="grid"><div><label>Selari (kaki lari)</label><input id="qu" type="number" value="10" step=".1" oninput="calc()"></div><div><label>Harga / kaki lari (RM)</label><input id="qur" type="number" value="250" oninput="calc()"></div></div>
+<div class="muted">Selari × harga/kaki lari</div><p>Kabinet atas: <b id="upperTotal">RM 2,500</b></p>
+
+<h3 style="color:#e50914">AKSESORI TAMBAHAN</h3>
+<div id="accessories"></div>
 <button class="btn outline" type="button" onclick="addAccessory()">+ Tambah Aksesori</button>
-<div class="quote-box"><div>JUMLAH AKSESORI</div><div id="accTotal">RM 0</div><div class="quote-total" id="total">RM 6,000</div><label>Deposit (RM)</label><input id="qd" type="number" value="0" oninput="calc()"><p>Baki: <b id="balance">RM 6,000</b></p></div>
+
+<div class="quote-box">
+<div>KABINET</div><div id="cabinetTotal">RM 6,000</div>
+<div>JUMLAH AKSESORI</div><div id="accTotal">RM 0</div>
+<div class="quote-total" id="total">RM 6,000</div>
+<label>Deposit (RM)</label><input id="qd" type="number" value="0" oninput="calc()">
+<p>Baki: <b id="balance">RM 6,000</b></p>
+</div>
 <button class="btn red" onclick="saveQuote()">Simpan Projek</button> <button class="btn outline" onclick="printQuote()">Cetak / PDF</button>
 </div></section>
 <section id="projects" class="screen"><h2>Projek Customer</h2><div id="projectList"></div></section>
@@ -71,10 +86,48 @@ footer{margin-top:35px;background:#f7f7f7;border-top:1px solid #ddd}.footer-inne
 const K='saujana_projects';let projects=JSON.parse(localStorage.getItem(K)||'[]');const $=id=>document.getElementById(id);
 function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));let n=$('n-'+id);if(n)n.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')render()}
 function money(n){return'RM '+Math.round(n||0).toLocaleString('ms-MY')}
-function calc(){let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0),t=lower+upper+acc,d=+$('qd').value||0;$('lowerTotal').textContent=money(lower);$('upperTotal').textContent=money(upper);$('accTotal').textContent=money(acc);$('total').textContent=money(t);$('balance').textContent=money(t-d)}
-function addAccessory(){let x=document.createElement('div');x.className='access-row grid';x.style.marginBottom='10px';x.innerHTML=`<div><label>Aksesori</label><select class="acc-name"><option>Rak Pinggan</option><option>Rak Botol / Seasoning</option><option>Tong Sampah Built-in</option><option>Pull-out Basket</option><option>Magic Corner</option><option>Lift-up Cabinet</option><option>Lampu LED</option><option>Socket / Aksesori Elektrik</option><option>Aksesori Lain</option></select></div><div><label>Harga (RM)</label><input class="acc-price" type="number" value="0" oninput="calc()"></div>`;$('accessories').appendChild(x)}
+function calc(){
+ let lower=(+$('ql').value||0)*(+$('qr').value||0);
+ let upper=(+$('qu').value||0)*(+$('qur').value||0);
+ let acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0);
+ let t=lower+upper+acc,d=+$('qd').value||0;
+ $('lowerTotal').textContent=money(lower);
+ $('upperTotal').textContent=money(upper);
+ $('cabinetTotal').textContent=money(lower+upper);
+ $('accTotal').textContent=money(acc);
+ $('total').textContent=money(t);
+ $('balance').textContent=money(Math.max(0,t-d));
+}
+function addAccessory(){
+ const x=document.createElement('div');x.className='access-row grid';x.style.marginBottom='10px';
+ x.innerHTML=`<div><label>Aksesori</label><select class="acc-name">
+ <option>Rak Pinggan</option><option>Rak Botol / Seasoning</option><option>Tong Sampah Built-in</option>
+ <option>Pull-out Basket</option><option>Magic Corner</option><option>Lift-up Cabinet</option>
+ <option>Lampu LED</option><option>Socket / Aksesori Elektrik</option><option>Aksesori Lain</option>
+ </select></div><div><label>Harga (RM)</label><input class="acc-price" type="number" value="0" oninput="calc()"></div>
+ <div><label>Kuantiti</label><input class="acc-qty" type="number" value="1" min="1" oninput="calc()"></div>
+ <div><button class="btn outline" type="button" onclick="this.closest('.access-row').remove();calc()">Buang</button></div>`;
+ $('accessories').appendChild(x);
+ calc();
+}
 function wa(t){window.open('https://wa.me/601113232186?text='+encodeURIComponent(t),'_blank')}
-function saveQuote(){let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0),t=lower+upper+acc,d=+$('qd').value||0;projects.unshift({name:$('qn').value||'Customer',phone:$('qp').value||'',type:'Kabinet Bawah + Kabinet Atas + Aksesori',total:t,deposit:d,status:'QUOTATION'});localStorage.setItem(K,JSON.stringify(projects));render();show('projects')}
+function saveQuote(){
+ let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),
+ acc=[...document.querySelectorAll('.acc-price')].reduce((s,e)=>s+(+e.value||0),0),t=lower+upper+acc,d=+$('qd').value||0;
+ projects.unshift({name:$('qn').value||'Customer',phone:$('qp').value||'',type:'Kabinet Bawah + Kabinet Atas + Aksesori',total:t,deposit:d,status:'QUOTATION'});
+ localStorage.setItem(K,JSON.stringify(projects));render();show('projects')
+}
+function printQuote(){
+ let lower=(+$('ql').value||0)*(+$('qr').value||0),upper=(+$('qu').value||0)*(+$('qur').value||0),
+ acc=[...document.querySelectorAll('.access-row')].reduce((s,r)=>s+(+(r.querySelector('.acc-price')?.value)||0)*(+(r.querySelector('.acc-qty')?.value)||0),0),
+ t=lower+upper+acc,d=+$('qd').value||0;
+ let rows=[...document.querySelectorAll('.access-row')].map(r=>`${r.querySelector('.acc-name').value}: ${r.querySelector('.acc-qty').value} × ${money(+(r.querySelector('.acc-price').value)||0)}`).join('<br>');
+ $('pq').innerHTML=`Customer: <b>${$('qn').value||'-'}</b><br>Telefon: ${$('qp').value||'-'}<br><br><b>KABINET BAWAH</b><br>${$('ql').value} kaki × RM ${$('qr').value}/kaki = <b>${money(lower)}</b><br><br><b>KABINET ATAS</b><br>${$('qu').value} kaki × RM ${$('qur').value}/kaki = <b>${money(upper)}</b><br><br><b>AKSESORI TAMBAHAN</b><br>${rows||'-'}<br><br><b>JUMLAH: ${money(t)}</b><br>Deposit: ${money(d)}<br>Baki: <b>${money(Math.max(0,t-d))}</b>`;
+ show('print');window.print();
+}
+function render(){$('projectList').innerHTML=projects.length?projects.map((p,i)=>`<div class="card"><b>${p.name}</b> <span class="status">${p.status}</span><p>${p.type} • ${money(p.total)} • Deposit ${money(p.deposit)}</p><select onchange="status(${i},this.value)"><option ${p.status==='QUOTATION'?'selected':''}>QUOTATION</option><option ${p.status==='DEPOSIT'?'selected':''}>DEPOSIT</option><option ${p.status==='PRODUCTION'?'selected':''}>PRODUCTION</option><option ${p.status==='INSTALLATION'?'selected':''}>INSTALLATION</option><option ${p.status==='COMPLETED'?'selected':''}>COMPLETED</option></select> <button class="btn outline" onclick="wa('Salam ${p.name}, update projek: ${p.status}.')">WhatsApp</button></div>`).join(''):'<div class="card">Belum ada projek.</div>';$('sproj').textContent=projects.length;$('ssales').textContent=money(projects.reduce((a,p)=>a+p.total,0));$('sdep').textContent=money(projects.reduce((a,p)=>a+p.deposit,0))}
+function status(i,v){projects[i].status=v;localStorage.setItem(K,JSON.stringify(projects));render()}
+function printQuote(){let lower=(+$('ql').value||0)*(+$('qr').value||0),area=(+$('qu').value||0)*(+$('qh').value||0),upper=area*(+$('qur').value||0),t=lower+upper,d=+$('qd').value||0;$('pq').innerHTML=`Customer: <b>${$('qn').value||'-'}</b><br>Telefon: ${$('qp').value||'-'}<br><br><b>KABINET BAWAH</b><br>${$('ql').value} kaki × RM ${$('qr').value}/kaki = <b>${money(lower)}</b><br><br><b>KABINET ATAS</b><br>${$('qu').value} kaki × ${$('qh').value} kaki = ${area.toFixed(2)} kaki²<br>RM ${$('qur').value}/kaki² = <b>${money(upper)}</b><br><br>JUMLAH: <b>${money(t)}</b><br>Deposit: ${money(d)}<br>Baki: <b>${money(t-d)}</b><br><br><small>Harga akhir tertakluk kepada measurement, material, aksesori dan rekabentuk.</small>`;show('print');setTimeout(()=>window.print(),100)}
 function goCategory(cat){show('catalog');setTimeout(()=>{let b=[...document.querySelectorAll('.filters button')].find(x=>x.textContent.trim()===cat);filterCatalog(cat,b)},50)}
 const catalogItems=[
 ['Kabinet Dapur','kabinet-dapur-01.jpg','Kabinet Dapur Modern','Rekaan custom dengan kemasan moden.'],['Kabinet Dapur','kabinet-dapur-02.jpg','Kabinet Dapur Biru','Susun atur kemas dan praktikal.'],['Rak TV','rak-tv-01.jpg','Rak TV Hitam','TV wall custom dan kemas.'],['Rak TV','rak-tv-02.jpg','Feature Wall Marble','Panel TV marble premium.'],['Rak TV','rak-tv-03.jpg','Feature Wall LED','Pencahayaan warm LED.'],['Rak TV','rak-tv-04.jpg','Rak TV Minimalis','Rekaan minimalis dua tona.'],['Panel Dinding','panel-dinding-01.jpg','Panel Dinding Dekoratif','Slat wall dan panel dekorasi.'],['Almari Bilik','almari-bilik-01.jpg','Almari Bilik Custom','Built-in dengan ruang maksimum.'],['Kabinet Dapur','kabinet-dapur-03.jpg','Kabinet Dapur Kayu Putih','Gabungan kayu dan putih.'],['Kabinet Dapur','kabinet-dapur-04.jpg','Kabinet Dapur Putih','Rekaan cerah dengan island.'],['Kabinet Dapur','kabinet-dapur-05.jpg','Kabinet Dapur Hitam Kayu','Hitam dan tona kayu.'],['Rak TV','rak-display-01.jpg','Rak Display Custom','Rak simpanan dua tona.'],['Kabinet Dapur','kabinet-dapur-06.jpg','Kabinet Dapur Hitam Premium','Kemasan hitam premium.'],['Kabinet Dapur','kabinet-dapur-07.jpg','Kabinet Dapur Putih Marble','Countertop corak marble.'],['Bawah Tangga','bawah-tangga-01.jpg','Kabinet Bawah Tangga','Maksimumkan ruang bawah tangga.'],['Kabinet Dapur','kabinet-dapur-08.jpg','Kabinet Dapur Hijau','Kemasan hijau dan putih.'],['Almari Bilik','almari-bilik-02.jpg','Almari Bilik Full Height','Almari penuh dinding.'],['Almari Bilik','almari-bilik-03.jpg','Almari Sliding Modern','Sliding dua tona.']

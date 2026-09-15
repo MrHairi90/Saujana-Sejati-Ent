@@ -1,11 +1,50 @@
-<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Saujana Sejati Ent</title>
+<!doctype html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#171717"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Saujana Sejati"><title>Saujana Sejati Ent</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f5f2ec;color:#171717;font-family:Arial,sans-serif}header{background:#171717;color:#fff;padding:16px;position:sticky;top:0}.brand{font-weight:900;letter-spacing:1px}.gold{color:#d9b56b}nav{display:flex;gap:6px;overflow:auto;margin-top:10px}button,.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer}nav button{background:#333;color:#fff}.wrap{max-width:900px;margin:auto;padding:18px}.screen{display:none}.screen.active{display:block}.hero,.card,.tile{background:#fff;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 5px 18px #0000000b}.hero{background:#222;color:#fff;padding:25px}.hero h1{font-size:30px;margin:0 0 8px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.tile{margin:0}.icon{font-size:30px}label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px}input,select{width:100%;padding:11px;border:1px solid #ddd;border-radius:9px;background:#fff}.goldbtn{background:#d9b56b}.darkbtn{background:#171717;color:#fff}.row{display:flex;gap:8px;flex-wrap:wrap}.stat{flex:1;min-width:130px}.big{font-size:24px;font-weight:900}.muted{color:#777;font-size:12px}.status{padding:5px 8px;border-radius:20px;background:#eee;font-size:12px;font-weight:700}@media(min-width:700px){.grid{grid-template-columns:repeat(5,1fr)}}@media print{header,.no-print{display:none!important}.screen{display:none}.printable{display:block!important}}
+
+/* Katalog Projek */
+.catalog-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.catalog-sub{color:#666;font-size:14px;margin-top:-4px}
+.filters{display:flex;gap:8px;overflow:auto;padding:8px 0 12px;position:sticky;top:91px;background:#f5f2ec;z-index:5}
+.filters button{white-space:nowrap;background:#fff;border:1px solid #e6dfd2;color:#333}
+.filters button.active{background:#171717;color:#fff}
+.catalog-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.product-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #00000012}
+.product-card img{width:100%;height:210px;object-fit:cover;display:block}
+.product-info{padding:13px}
+.product-info h3{margin:0 0 5px;font-size:17px}
+.product-info p{margin:0 0 10px;color:#666;font-size:12px;line-height:1.45}
+.product-actions{display:flex;gap:7px}
+.product-actions button{flex:1;padding:9px 8px;font-size:12px}
+.viewbtn{background:#f0ece4}
+@media(min-width:700px){.catalog-grid{grid-template-columns:repeat(3,1fr)}.product-card img{height:230px}.filters{top:91px}}
+@media(max-width:420px){.catalog-grid{gap:10px}.product-card img{height:175px}.product-info{padding:10px}.product-info h3{font-size:15px}.product-actions button{font-size:11px}}
+
 </style></head><body>
 <header><div class="brand">SAUJANA <span class="gold">SEJATI ENT</span></div><div class="muted" style="color:#bbb">Custom Cabinet & Interior</div><nav><button onclick="show('home')">Home</button><button onclick="show('catalog')">Katalog</button><button onclick="show('quote')">Quotation</button><button onclick="show('projects')">Projek</button><button onclick="show('dashboard')">Dashboard</button></nav></header>
 <main class="wrap">
 <section id="home" class="screen active"><div class="hero"><h1>Rumah cantik, kabinet kemas.</h1><p>Design custom ikut ruang, gaya dan bajet anda.</p><button class="btn goldbtn" onclick="show('quote')">Buat Quotation</button> <button class="btn darkbtn" onclick="wa('Salam Saujana Sejati Ent, saya berminat dengan kabinet custom.')">WhatsApp</button></div><div class="grid"><div class="tile">🍳<br><b>Kabinet Dapur</b></div><div class="tile">👔<br><b>Almari Bilik</b></div><div class="tile">📺<br><b>Rak TV</b></div><div class="tile">🪜<br><b>Bawah Tangga</b></div><div class="tile">🍹<br><b>Bar Counter</b></div></div><div class="card"><b>Promosi</b><p>FREE UKURAN • FREE NASIHAT • Harga terus dari kilang</p></div></section>
-<section id="catalog" class="screen"><h2>Katalog</h2><div class="grid"><div class="tile">🍳<h3>Kabinet Dapur</h3></div><div class="tile">👔<h3>Almari Bilik</h3></div><div class="tile">📺<h3>Rak TV</h3></div><div class="tile">🪜<h3>Rak Bawah Tangga</h3></div><div class="tile">🍹<h3>Bar Counter</h3></div></div></section>
+
+<section id="catalog" class="screen">
+  <div class="catalog-head">
+    <div>
+      <h2 style="margin-bottom:5px">Katalog Projek</h2>
+      <div class="catalog-sub">Contoh hasil kerja Saujana Sejati Ent</div>
+    </div>
+    <button class="btn goldbtn" onclick="wa('Salam Saujana Sejati Ent, saya berminat dengan salah satu design dalam katalog.')">Tanya Design</button>
+  </div>
+
+  <div class="filters">
+    <button class="active" onclick="filterCatalog('Semua',this)">Semua</button>
+    <button onclick="filterCatalog('Kabinet Dapur',this)">Kabinet Dapur</button>
+    <button onclick="filterCatalog('Rak TV',this)">Rak TV</button>
+    <button onclick="filterCatalog('Almari Bilik',this)">Almari Bilik</button>
+    <button onclick="filterCatalog('Panel Dinding',this)">Panel Dinding</button>
+  </div>
+
+  <div id="catalogGrid" class="catalog-grid"></div>
+</section>
+
 <section id="quote" class="screen"><h2>Quotation</h2><div class="card"><label>Nama Customer</label><input id="qn" placeholder="Nama"><label>No. Telefon</label><input id="qp" placeholder="01x-xxxxxxx"><label>Jenis kabinet</label><select id="qt"><option>Kabinet Dapur</option><option>Almari Bilik</option><option>Rak TV</option><option>Rak Bawah Tangga</option><option>Bar Counter</option></select><label>Panjang (kaki)</label><input id="ql" type="number" value="10" oninput="calc()"><label>Harga/kaki (RM)</label><input id="qr" type="number" value="350" oninput="calc()"><label>Deposit (RM)</label><input id="qd" type="number" value="0" oninput="calc()"><h2 id="total">RM 3,500</h2><div>Baki: <span id="balance">RM 3,500</span></div><br><button class="btn goldbtn" onclick="saveQuote()">Simpan Projek</button><button class="btn darkbtn" onclick="printQuote()">Cetak / PDF</button></div></section>
 <section id="projects" class="screen"><h2>Projek Customer</h2><div id="projectList"></div></section>
 <section id="dashboard" class="screen"><h2>Dashboard Admin</h2><div class="row"><div class="card stat">Projek<div class="big" id="sproj">0</div></div><div class="card stat">Jualan<div class="big" id="ssales">RM 0</div></div><div class="card stat">Deposit<div class="big" id="sdep">RM 0</div></div></div><div class="card"><b>Workflow</b><p>LEAD → QUOTATION → DEPOSIT → PRODUCTION → INSTALLATION → COMPLETED</p></div></section>
@@ -20,5 +59,52 @@ function saveQuote(){let t=(+ql.value||0)*(+qr.value||0),d=+qd.value||0;projects
 function render(){projectList.innerHTML=projects.length?projects.map((p,i)=>`<div class="card"><b>${p.name}</b> <span class="status">${p.status}</span><p>${p.type} • ${money(p.total)} • Deposit ${money(p.deposit)}</p><select onchange="status(${i},this.value)"><option>QUOTATION</option><option>DEPOSIT</option><option>PRODUCTION</option><option>INSTALLATION</option><option>COMPLETED</option></select> <button class="btn darkbtn" onclick="wa('Salam ${p.name}, update projek: ${p.status}.')">WhatsApp</button></div>`).join(''):'<div class="card">Belum ada projek.</div>';sproj.textContent=projects.length;ssales.textContent=money(projects.reduce((a,p)=>a+p.total,0));sdep.textContent=money(projects.reduce((a,p)=>a+p.deposit,0))}
 function status(i,v){projects[i].status=v;localStorage.setItem(K,JSON.stringify(projects));render()}
 function printQuote(){let t=(+ql.value||0)*(+qr.value||0),d=+qd.value||0;pq.innerHTML=`Customer: <b>${qn.value||'-'}</b><br>Telefon: ${qp.value||'-'}<br>Jenis: ${qt.value}<br>Panjang: ${ql.value} kaki<br>Jumlah: <b>${money(t)}</b><br>Deposit: ${money(d)}<br>Baki: <b>${money(t-d)}</b><br><br><small>Harga akhir tertakluk kepada measurement, material, aksesori dan rekabentuk.</small>`;show('print');setTimeout(()=>window.print(),100)}
+
+const catalogItems=[
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-01.jpg',name:'Kabinet Dapur Modern',desc:'Rekaan custom dengan kemasan hitam berkilat dan lampu LED.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-02.jpg',name:'Kabinet Dapur Biru',desc:'Rekaan dapur custom dengan susun atur kemas dan praktikal.'},
+ {cat:'Rak TV',img:'images/rak-tv-01.jpg',name:'Rak TV Hitam',desc:'TV wall custom dengan kabinet simpanan dan rak kaca.'},
+ {cat:'Rak TV',img:'images/rak-tv-02.jpg',name:'Feature Wall Marble',desc:'Panel TV marble dengan slat wall dan kabinet bawah.'},
+ {cat:'Rak TV',img:'images/rak-tv-03.jpg',name:'Feature Wall LED',desc:'Rekaan TV wall premium dengan pencahayaan warm LED.'},
+ {cat:'Rak TV',img:'images/rak-tv-04.jpg',name:'Rak TV Minimalis',desc:'Panel marble putih dengan kabinet gantung dua tona.'},
+ {cat:'Panel Dinding',img:'images/panel-dinding-01.jpg',name:'Panel Dinding Dekoratif',desc:'Rekaan panel dinding dengan slat wall dan bingkai dekorasi.'},
+ {cat:'Almari Bilik',img:'images/almari-bilik-01.jpg',name:'Almari Bilik Custom',desc:'Almari built-in kemasan putih dengan ruang simpanan maksimum.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-03.jpg',name:'Kabinet Dapur Kayu Putih',desc:'Gabungan tona kayu dan putih dengan susun atur moden.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-04.jpg',name:'Kabinet Dapur Putih',desc:'Rekaan cerah dan kemas dengan island countertop.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-05.jpg',name:'Kabinet Dapur Hitam Kayu',desc:'Gabungan hitam dan tona kayu dengan kabinet tinggi.'},
+ {cat:'Rak TV',img:'images/rak-display-01.jpg',name:'Rak Display Custom',desc:'Rak simpanan dua tona sesuai untuk ruang keluarga.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-06.jpg',name:'Kabinet Dapur Hitam Premium',desc:'Kemasan hitam dengan ruang peti sejuk dan pantry.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-07.jpg',name:'Kabinet Dapur Putih Marble',desc:'Rekaan putih dengan countertop corak marble.'},
+ {cat:'Bawah Tangga',img:'images/bawah-tangga-01.jpg',name:'Kabinet Bawah Tangga',desc:'Maksimumkan ruang bawah tangga dengan kabinet custom.'},
+ {cat:'Kabinet Dapur',img:'images/kabinet-dapur-08.jpg',name:'Kabinet Dapur Hijau',desc:'Kemasan hijau berkilat dengan kombinasi kabinet putih.'},
+ {cat:'Almari Bilik',img:'images/almari-bilik-02.jpg',name:'Almari Bilik Full Height',desc:'Almari custom penuh dinding dengan meja solek terbina.'},
+ {cat:'Almari Bilik',img:'images/almari-bilik-03.jpg',name:'Almari Sliding Modern',desc:'Almari sliding dua tona dengan kemasan minimalis.'}
+];
+
+function filterCatalog(cat,btn){
+ document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+ if(btn) btn.classList.add('active');
+ const items=cat==='Semua'?catalogItems:catalogItems.filter(x=>x.cat===cat);
+ catalogGrid.innerHTML=items.map((x,i)=>`
+  <article class="product-card">
+   <img src="${x.img}" alt="${x.name}" loading="lazy" onclick="openCatalog('${x.img}','${x.name}')">
+   <div class="product-info">
+    <div class="muted">${x.cat}</div>
+    <h3>${x.name}</h3>
+    <p>${x.desc}</p>
+    <div class="product-actions">
+     <button class="viewbtn" onclick="openCatalog('${x.img}','${x.name}')">Lihat</button>
+     <button class="darkbtn" onclick="wa('Salam, saya berminat dengan design ${x.name}. Boleh saya dapatkan quotation?')">Quotation</button>
+    </div>
+   </div>
+  </article>`).join('');
+}
+
+function openCatalog(img,name){
+ const w=window.open('','_blank');
+ if(w){w.document.write(`<title>${name} - Saujana Sejati Ent</title><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh"><img src="${img}" alt="${name}" style="max-width:100%;max-height:100vh;object-fit:contain"></body>`);w.document.close();}
+}
+
+filterCatalog('Semua',null);
 calc();render();
 </script></body></html>

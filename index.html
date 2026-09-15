@@ -61,24 +61,24 @@ function status(i,v){projects[i].status=v;localStorage.setItem(K,JSON.stringify(
 function printQuote(){let t=(+ql.value||0)*(+qr.value||0),d=+qd.value||0;pq.innerHTML=`Customer: <b>${qn.value||'-'}</b><br>Telefon: ${qp.value||'-'}<br>Jenis: ${qt.value}<br>Panjang: ${ql.value} kaki<br>Jumlah: <b>${money(t)}</b><br>Deposit: ${money(d)}<br>Baki: <b>${money(t-d)}</b><br><br><small>Harga akhir tertakluk kepada measurement, material, aksesori dan rekabentuk.</small>`;show('print');setTimeout(()=>window.print(),100)}
 
 const catalogItems=[
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-01.jpg',name:'Kabinet Dapur Modern',desc:'Rekaan custom dengan kemasan hitam berkilat dan lampu LED.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-02.jpg',name:'Kabinet Dapur Biru',desc:'Rekaan dapur custom dengan susun atur kemas dan praktikal.'},
- {cat:'Rak TV',img:'images/rak-tv-01.jpg',name:'Rak TV Hitam',desc:'TV wall custom dengan kabinet simpanan dan rak kaca.'},
- {cat:'Rak TV',img:'images/rak-tv-02.jpg',name:'Feature Wall Marble',desc:'Panel TV marble dengan slat wall dan kabinet bawah.'},
- {cat:'Rak TV',img:'images/rak-tv-03.jpg',name:'Feature Wall LED',desc:'Rekaan TV wall premium dengan pencahayaan warm LED.'},
- {cat:'Rak TV',img:'images/rak-tv-04.jpg',name:'Rak TV Minimalis',desc:'Panel marble putih dengan kabinet gantung dua tona.'},
- {cat:'Panel Dinding',img:'images/panel-dinding-01.jpg',name:'Panel Dinding Dekoratif',desc:'Rekaan panel dinding dengan slat wall dan bingkai dekorasi.'},
- {cat:'Almari Bilik',img:'images/almari-bilik-01.jpg',name:'Almari Bilik Custom',desc:'Almari built-in kemasan putih dengan ruang simpanan maksimum.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-03.jpg',name:'Kabinet Dapur Kayu Putih',desc:'Gabungan tona kayu dan putih dengan susun atur moden.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-04.jpg',name:'Kabinet Dapur Putih',desc:'Rekaan cerah dan kemas dengan island countertop.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-05.jpg',name:'Kabinet Dapur Hitam Kayu',desc:'Gabungan hitam dan tona kayu dengan kabinet tinggi.'},
- {cat:'Rak TV',img:'images/rak-display-01.jpg',name:'Rak Display Custom',desc:'Rak simpanan dua tona sesuai untuk ruang keluarga.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-06.jpg',name:'Kabinet Dapur Hitam Premium',desc:'Kemasan hitam dengan ruang peti sejuk dan pantry.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-07.jpg',name:'Kabinet Dapur Putih Marble',desc:'Rekaan putih dengan countertop corak marble.'},
- {cat:'Bawah Tangga',img:'images/bawah-tangga-01.jpg',name:'Kabinet Bawah Tangga',desc:'Maksimumkan ruang bawah tangga dengan kabinet custom.'},
- {cat:'Kabinet Dapur',img:'images/kabinet-dapur-08.jpg',name:'Kabinet Dapur Hijau',desc:'Kemasan hijau berkilat dengan kombinasi kabinet putih.'},
- {cat:'Almari Bilik',img:'images/almari-bilik-02.jpg',name:'Almari Bilik Full Height',desc:'Almari custom penuh dinding dengan meja solek terbina.'},
- {cat:'Almari Bilik',img:'images/almari-bilik-03.jpg',name:'Almari Sliding Modern',desc:'Almari sliding dua tona dengan kemasan minimalis.'}
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-01.jpg',name:'Kabinet Dapur Modern',desc:'Rekaan custom dengan kemasan hitam berkilat dan lampu LED.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-02.jpg',name:'Kabinet Dapur Biru',desc:'Rekaan dapur custom dengan susun atur kemas dan praktikal.'},
+ {cat:'Rak TV',img:'rak-tv-01.jpg',name:'Rak TV Hitam',desc:'TV wall custom dengan kabinet simpanan dan rak kaca.'},
+ {cat:'Rak TV',img:'rak-tv-02.jpg',name:'Feature Wall Marble',desc:'Panel TV marble dengan slat wall dan kabinet bawah.'},
+ {cat:'Rak TV',img:'rak-tv-03.jpg',name:'Feature Wall LED',desc:'Rekaan TV wall premium dengan pencahayaan warm LED.'},
+ {cat:'Rak TV',img:'rak-tv-04.jpg',name:'Rak TV Minimalis',desc:'Panel marble putih dengan kabinet gantung dua tona.'},
+ {cat:'Panel Dinding',img:'panel-dinding-01.jpg',name:'Panel Dinding Dekoratif',desc:'Rekaan panel dinding dengan slat wall dan bingkai dekorasi.'},
+ {cat:'Almari Bilik',img:'almari-bilik-01.jpg',name:'Almari Bilik Custom',desc:'Almari built-in kemasan putih dengan ruang simpanan maksimum.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-03.jpg',name:'Kabinet Dapur Kayu Putih',desc:'Gabungan tona kayu dan putih dengan susun atur moden.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-04.jpg',name:'Kabinet Dapur Putih',desc:'Rekaan cerah dan kemas dengan island countertop.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-05.jpg',name:'Kabinet Dapur Hitam Kayu',desc:'Gabungan hitam dan tona kayu dengan kabinet tinggi.'},
+ {cat:'Rak TV',img:'rak-display-01.jpg',name:'Rak Display Custom',desc:'Rak simpanan dua tona sesuai untuk ruang keluarga.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-06.jpg',name:'Kabinet Dapur Hitam Premium',desc:'Kemasan hitam dengan ruang peti sejuk dan pantry.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-07.jpg',name:'Kabinet Dapur Putih Marble',desc:'Rekaan putih dengan countertop corak marble.'},
+ {cat:'Bawah Tangga',img:'bawah-tangga-01.jpg',name:'Kabinet Bawah Tangga',desc:'Maksimumkan ruang bawah tangga dengan kabinet custom.'},
+ {cat:'Kabinet Dapur',img:'kabinet-dapur-08.jpg',name:'Kabinet Dapur Hijau',desc:'Kemasan hijau berkilat dengan kombinasi kabinet putih.'},
+ {cat:'Almari Bilik',img:'almari-bilik-02.jpg',name:'Almari Bilik Full Height',desc:'Almari custom penuh dinding dengan meja solek terbina.'},
+ {cat:'Almari Bilik',img:'almari-bilik-03.jpg',name:'Almari Sliding Modern',desc:'Almari sliding dua tona dengan kemasan minimalis.'}
 ];
 
 function filterCatalog(cat,btn){

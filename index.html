@@ -96,6 +96,138 @@ main{margin-left:250px;padding-top:76px;min-height:100vh}
 @media(min-width:901px){nav{display:none}}
 @media(max-width:560px){.dash-grid{grid-template-columns:1fr 1fr}.dash-stat{min-height:105px;padding:13px}.dash-stat .n{font-size:27px}.booking-section-head{font-size:18px}.booking-actions button{flex:1}.booking-value{display:block}}
 </style>
+
+<style id="admin-v3-premium">
+/* SAUJANA SEJATI ADMIN V3 — visual layer only */
+:root{
+ --r:#e50914;--r2:#ff3038;--dark:#07090c;--panel:#101419;--panel2:#151a20;
+ --line:rgba(255,255,255,.10);--muted:#9da6b2;--gold:#d6a84f;
+}
+body{background:#07090c;color:#eef2f6}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background:radial-gradient(circle at 72% 10%,rgba(229,9,20,.12),transparent 28%),
+ linear-gradient(135deg,#07090c 0%,#0d1116 52%,#090b0e 100%)}
+.admin-sidebar{
+ width:270px;background:linear-gradient(180deg,#090b0e 0%,#11151a 55%,#080a0d 100%);
+ border-right:1px solid rgba(255,0,20,.22);box-shadow:12px 0 40px rgba(0,0,0,.35);
+ padding:16px 13px
+}
+.admin-sidebar .brand{
+ padding:8px 8px 20px;border-bottom:1px solid rgba(255,255,255,.08);
+ position:relative
+}
+.admin-sidebar .brand:after{
+ content:"";display:block;height:2px;width:75%;margin:13px auto 0;
+ background:linear-gradient(90deg,transparent,var(--r),transparent);box-shadow:0 0 14px rgba(229,9,20,.75)
+}
+.admin-sidebar .brand img{
+ width:190px;height:92px;filter:drop-shadow(0 0 10px rgba(229,9,20,.35))
+}
+.admin-sidebar .brand b{font-size:15px;letter-spacing:.4px}
+.admin-sidebar .brand small{color:#89929e;margin-top:6px}
+.admin-sidebar button{
+ color:#dce2e8;padding:13px 14px;border-radius:11px;margin-top:6px;
+ font-size:13px;transition:.2s;border:1px solid transparent
+}
+.admin-sidebar button:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.06);transform:translateX(2px)}
+.admin-sidebar button.active{
+ background:linear-gradient(90deg,rgba(229,9,20,.24),rgba(229,9,20,.04));
+ border:1px solid rgba(229,9,20,.32);border-left:4px solid var(--r);
+ box-shadow:inset 0 0 20px rgba(229,9,20,.06),0 5px 20px rgba(0,0,0,.18)
+}
+.admin-sidebar .side-quote{
+ background:linear-gradient(135deg,#e50914,#a50008);border:0;
+ box-shadow:0 8px 24px rgba(229,9,20,.25);letter-spacing:.3px
+}
+.admin-sidebar .side-foot{color:#777f8a;margin-top:28px}
+.top{
+ left:270px;height:78px;background:rgba(8,10,13,.88);backdrop-filter:blur(14px);
+ border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 8px 30px rgba(0,0,0,.25)
+}
+.top .logo{width:122px;height:58px;filter:drop-shadow(0 0 8px rgba(229,9,20,.3))}
+.top:after{
+ content:"SAUJANA SEJATI  •  ADMIN PANEL";position:absolute;left:190px;
+ color:#69727e;font-size:11px;letter-spacing:2px;font-weight:800
+}
+.top .wa{
+ background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(229,9,20,.65);
+ border-radius:999px;padding:10px 17px;box-shadow:0 0 18px rgba(229,9,20,.10)
+}
+main{margin-left:270px;padding-top:78px}
+.wrap{max-width:1540px;padding:26px 30px}
+.section-title{margin-bottom:20px}
+.section-title h2,#dashboard h2{font-size:30px;color:#fff;font-weight:900;letter-spacing:-.7px}
+.muted{color:#8f99a5}
+.btn{border-radius:10px;font-weight:800}
+.panel,.client,.bottom,.project-item,.booking-card,.dash-stat{
+ background:linear-gradient(145deg,rgba(21,26,32,.96),rgba(11,14,18,.96))!important;
+ border:1px solid rgba(255,255,255,.09)!important;
+ box-shadow:0 12px 35px rgba(0,0,0,.24)!important;color:#edf1f5
+}
+.panel h3,.project-item h3,.booking-card h3{color:#fff}
+input,textarea,select{
+ background:#0b0f13!important;color:#f1f4f7!important;border:1px solid #2a3139!important;
+ border-radius:9px!important
+}
+input:focus,textarea:focus,select:focus{border-color:rgba(229,9,20,.75)!important;box-shadow:0 0 0 3px rgba(229,9,20,.10)!important}
+#dashboard .wrap{
+ position:relative;overflow:hidden;border-radius:18px
+}
+#dashboard .wrap:before{
+ content:"";position:absolute;inset:0;z-index:-1;opacity:.18;
+ background:linear-gradient(90deg,rgba(7,9,12,.98),rgba(7,9,12,.68),rgba(7,9,12,.96)),
+ url('kabinet-dapur-01.jpg') center/cover;
+ filter:saturate(.65) contrast(1.1)
+}
+#dashboard .section-title{
+ padding:24px 24px 8px;margin:0;border-radius:16px 16px 0 0
+}
+#dashboard .dash-grid{gap:15px;margin:10px 0 18px}
+#dashboard .dash-stat{
+ min-height:130px;padding:20px 20px 17px;border-radius:15px;position:relative;overflow:hidden
+}
+#dashboard .dash-stat:after{
+ content:"";position:absolute;right:-30px;bottom:-42px;width:120px;height:120px;
+ border-radius:50%;background:rgba(229,9,20,.09);box-shadow:0 0 50px rgba(229,9,20,.16)
+}
+#dashboard .dash-stat:hover{transform:translateY(-2px);border-color:rgba(229,9,20,.35)!important}
+#dashboard .stat-ico{font-size:24px;filter:drop-shadow(0 0 8px rgba(229,9,20,.5))}
+#dashboard .dash-stat .n{font-size:28px;font-weight:950;color:#fff;margin-top:7px}
+#dashboard .dash-stat:first-child .n{color:#ff3a42}
+.dashboard-projects{border-radius:15px!important;padding:18px!important}
+.dashboard-projects h3{font-size:17px!important}
+.dash-project-row{background:#0b0f13!important;border-color:#262d35!important;color:#fff}
+.dash-project-value{color:#ff3a42!important}
+.hero{
+ min-height:390px;border-radius:18px!important;overflow:hidden;
+ background:linear-gradient(90deg,rgba(7,9,12,.97) 0%,rgba(7,9,12,.83) 40%,rgba(7,9,12,.22) 100%),url('kabinet-dapur-01.jpg') center/cover!important;
+ box-shadow:0 18px 50px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08)
+}
+.hero-copy h1{color:#fff}.hero-copy h1 span{color:#ff3038}
+.cat,.catalog-card{
+ background:linear-gradient(145deg,#151a20,#0b0f13)!important;
+ border-color:rgba(255,255,255,.09)!important;color:#fff;
+ box-shadow:0 10px 30px rgba(0,0,0,.22)!important
+}
+footer{background:#080a0d!important;color:#777;border-top:1px solid rgba(255,255,255,.08)}
+nav{background:#090b0e!important;border-top:1px solid rgba(255,255,255,.08)!important}
+#liveNotif{
+ background:linear-gradient(135deg,#171b20,#0c0f13)!important;border:1px solid rgba(229,9,20,.6)!important;
+ box-shadow:0 12px 35px rgba(0,0,0,.4)!important
+}
+@media(max-width:900px){
+ .admin-sidebar{display:none}.top{left:0;height:64px}.top:after{display:none}
+ .top .logo{width:105px;height:52px}.top .wa{padding:8px 12px;font-size:11px}
+ main{margin-left:0;padding-top:64px}.wrap{padding:16px 12px}
+ #dashboard .section-title{padding:16px 10px 6px}
+ #dashboard .dash-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+ #dashboard .dash-grid{grid-template-columns:1fr 1fr;gap:9px}
+ #dashboard .dash-stat{min-height:112px;padding:14px}.dash-stat .n{font-size:22px!important}
+ .hero{min-height:330px}.hero-copy{padding:24px}
+}
+</style>
 </head><body><div id="liveNotif"><div class="notif-title">🔔 Booking Baru Masuk!</div><div class="notif-text" id="liveNotifText">Ada booking baru dari website Customer.</div></div>
 
 

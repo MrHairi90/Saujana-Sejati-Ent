@@ -227,6 +227,25 @@ nav{background:#090b0e!important;border-top:1px solid rgba(255,255,255,.08)!impo
  #dashboard .dash-stat{min-height:112px;padding:14px}.dash-stat .n{font-size:22px!important}
  .hero{min-height:330px}.hero-copy{padding:24px}
 }
+/* V3 MOBILE DRAWER + BOOKING POLISH */
+.v3-menu{display:none;border:1px solid rgba(229,9,20,.45);background:#0b0f13;color:#fff;border-radius:10px;width:42px;height:42px;font-size:22px;box-shadow:0 0 16px rgba(229,9,20,.12)}
+.v3-overlay{display:none}
+.booking-toolbar{display:flex;gap:10px;padding:12px;flex-wrap:wrap;background:#0b0f13;border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.06)}
+.booking-search{flex:1;min-width:220px}
+.booking-detail{background:#0b0f13!important;border-color:#252c34!important;color:#dce2e8!important}
+.booking-value{background:#160d0e!important;border-color:rgba(229,9,20,.3)!important;color:#fff!important}
+.booking-section-head{background:linear-gradient(90deg,#151a20,#080a0d)!important}
+@media(max-width:900px){
+ .v3-menu{display:block;flex:0 0 auto}
+ .top{display:flex!important;gap:10px;align-items:center;padding:8px 12px!important}
+ .top .logo{margin-right:auto}
+ .admin-sidebar{display:block;transform:translateX(-105%);transition:transform .25s ease;width:285px;box-shadow:18px 0 45px rgba(0,0,0,.5);z-index:120}
+ .admin-sidebar.v3-open{transform:translateX(0)}
+ .v3-overlay{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:110;backdrop-filter:blur(2px)}
+ .v3-overlay.show{display:block}
+ nav{display:none!important}
+ main{margin-left:0;padding-top:64px!important}
+}
 </style>
 </head><body><div id="liveNotif"><div class="notif-title">🔔 Booking Baru Masuk!</div><div class="notif-text" id="liveNotifText">Ada booking baru dari website Customer.</div></div>
 
@@ -247,8 +266,8 @@ nav{background:#090b0e!important;border-top:1px solid rgba(255,255,255,.08)!impo
   <button data-side="home" onclick="showScreen('home')">⚙ <span>Tetapan</span></button>
   <button class="side-quote" onclick="showScreen('quote')">＋ QUOTATION BARU</button>
   <div class="side-foot">“Rumah Lebih Selesa,<br>Hidup Lebih Bahagia”</div>
-</aside>
-<header class="top"><img class="logo" src="logo-saujana-sejati.jpg" alt="Saujana Sejati Ent"><div class="slogan">Reka Ruang<br>Hidup Lebih Sempurna<div class="tagline">KABINET IDAMAN, RUANG LEBIH BERMAKNA</div></div><button class="wa" onclick="wa('Salam Saujana Sejati Ent, saya ingin bertanya tentang kabinet custom.')">WhatsApp<br><b>Chat di WhatsApp</b></button></header>
+</aside><div id="v3Overlay" class="v3-overlay" onclick="toggleV3Menu()"></div>
+<header class="top"><button class="v3-menu" onclick="toggleV3Menu()" aria-label="Menu">☰</button><img class="logo" src="logo-saujana-sejati.jpg" alt="Saujana Sejati Ent"><div class="slogan">Reka Ruang<br>Hidup Lebih Sempurna<div class="tagline">KABINET IDAMAN, RUANG LEBIH BERMAKNA</div></div><button class="wa" onclick="wa('Salam Saujana Sejati Ent, saya ingin bertanya tentang kabinet custom.')">WhatsApp<br><b>Chat di WhatsApp</b></button></header>
 <main>
 <section id="home" class="screen active"><div class="hero"><div class="hero-copy"><div class="eyebrow">CUSTOM CABINET & INTERIOR</div><h1>Rumah cantik,<br><span>kabinet kemas.</span></h1><p>Design custom ikut ruang, gaya dan bajet anda.</p><div class="actions hero-actions"><button class="btn red" onclick="showScreen('quote')">Buat Quotation ›</button><button class="btn green" onclick="wa('Salam Saujana Sejati Ent, saya berminat dengan kabinet custom.')">WhatsApp ›</button></div></div></div><div class="wrap"><div class="section-title"><div><h2>Servis Kami</h2><div class="muted">Tekan kategori untuk lihat design</div></div></div><div class="cat-grid"><div class="cat" onclick="catalogFilter('Kabinet Dapur')"><img src="kabinet-dapur-01.jpg"><div class="cat-info"><h3>Kabinet Dapur</h3><div>Moden & tahan lama</div></div><div class="arrow">›</div></div><div class="cat" onclick="catalogFilter('Almari Bilik')"><img src="almari-bilik-01.jpg"><div class="cat-info"><h3>Almari Bilik</h3><div>Sesuai setiap ruang</div></div><div class="arrow">›</div></div><div class="cat" onclick="catalogFilter('Rak TV')"><img src="rak-tv-01.jpg"><div class="cat-info"><h3>Rak TV</h3><div>Moden & eksklusif</div></div><div class="arrow">›</div></div><div class="cat" onclick="catalogFilter('Bawah Tangga')"><img src="bawah-tangga-01.jpg"><div class="cat-info"><h3>Bawah Tangga</h3><div>Manfaatkan setiap ruang</div></div><div class="arrow">›</div></div><div class="cat" onclick="catalogFilter('Kabinet Dapur')"><img src="kabinet-dapur-04.jpg"><div class="cat-info"><h3>Bar Counter</h3><div>Stil & berfungsi</div></div><div class="arrow">›</div></div><div class="cat" onclick="wa('Salam Saujana Sejati Ent, saya berminat dengan promosi kabinet.')"><img src="kabinet-dapur-07.jpg"><div class="cat-info"><h3>Promosi Istimewa</h3><div>Free ukuran • Free nasihat</div></div><div class="arrow">›</div></div></div><div class="promo"><div><h3>Promosi Istimewa</h3><p>FREE UKURAN • FREE NASIHAT • <b>HARGA TERUS DARI KILANG</b></p></div><button class="btn red" onclick="wa('Salam Saujana Sejati Ent, saya nak tahu tentang promosi kabinet.')">Tanya Sekarang ›</button></div></div></section>
 <section id="catalog" class="screen"><div class="wrap"><div class="section-title"><div><h2>Katalog Projek</h2><div class="muted">Contoh hasil kerja Saujana Sejati Ent</div></div><button class="btn red" onclick="showScreen('quote')">Buat Quotation</button></div><div style="display:flex;gap:8px;overflow:auto;padding:5px 0 14px"><button class="btn red" onclick="catalogFilter('Semua')">Semua</button><button class="btn blue" onclick="catalogFilter('Kabinet Dapur')">Kabinet Dapur</button><button class="btn blue" onclick="catalogFilter('Rak TV')">Rak TV</button><button class="btn blue" onclick="catalogFilter('Almari Bilik')">Almari Bilik</button><button class="btn blue" onclick="catalogFilter('Panel Dinding')">Panel Dinding</button><button class="btn blue" onclick="catalogFilter('Bawah Tangga')">Bawah Tangga</button></div><div id="catalogGrid" class="catalog-grid"></div></div></section>
@@ -300,7 +319,9 @@ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_F_JX1g6axQQBZUJTVRCqUA_fEc5YsA2";
 const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 let websiteBookings=[];
 const navIds={home:'navHome',catalog:'navCatalog',quote:'navQuote',projects:'navProjects',dashboard:'navDashboard'};const money=n=>'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});const v=id=>parseFloat(document.getElementById(id).value)||0;const ids=['lowerL','lowerR','upperL','upperR','tvW','tvH','tvR','wardW','wardH','wardR','deposit'];
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(navIds[id]).classList.add('active');document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')renderData();if(id==='catalog')renderCatalog('Semua')}
+function toggleV3Menu(){const s=document.querySelector('.admin-sidebar'),o=document.getElementById('v3Overlay');if(!s||!o)return;s.classList.toggle('v3-open');o.classList.toggle('show');}
+function closeV3Menu(){const s=document.querySelector('.admin-sidebar'),o=document.getElementById('v3Overlay');if(s)s.classList.remove('v3-open');if(o)o.classList.remove('show');}
+function showScreen(id){closeV3Menu();document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(navIds[id]).classList.add('active');document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')renderData();if(id==='catalog')renderCatalog('Semua')}
 function wa(t){window.open('https://wa.me/601113232186?text='+encodeURIComponent(t),'_blank')}
 function calc(){const lower=v('lowerL')*v('lowerR'),upper=v('upperL')*v('upperR'),tv=v('tvW')*v('tvH')*v('tvR'),ward=v('wardW')*v('wardH')*v('wardR'),total=lower+upper+tv+ward,dep=Math.min(v('deposit'),total);document.getElementById('lowerT').textContent=money(lower);document.getElementById('upperT').textContent=money(upper);document.getElementById('tvT').textContent=money(tv);document.getElementById('wardT').textContent=money(ward);document.getElementById('grand').textContent=money(total);document.getElementById('balance').textContent=money(total-dep)}
 function resetAll(){['name','phone','ic','address','notes','notes2'].forEach(id=>document.getElementById(id).value='');['lowerL','lowerR','upperL','upperR','tvW','tvH','wardW','wardH','wardR','deposit'].forEach(id=>document.getElementById(id).value=0);document.getElementById('tvR').value=60;document.getElementById('date').value=new Date().toISOString().slice(0,10);calc()}

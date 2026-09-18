@@ -543,18 +543,55 @@ let currentAuth=null;
 let editingAgentId=null;
 async function verifyAdminProfile(){
   if(!currentAuth)return false;
-  const {data,error}=await supabaseClient.from('admin_profiles').select('id,name,role,active').eq('id',currentAuth.user.id).eq('active',true).maybeSingle();
-  if(error || !data){
+
+  const st=document.getElementById('adminLoginStatus');
+
+  const {data,error}=await supabaseClient
+    .from('admin_profiles')
+    .select('id,name,role,active')
+    .eq('id',currentAuth.user.id)
+    .maybeSingle();
+
+  if(error){
+    console.error('Admin profile query error:',error);
+    if(st)st.textContent='❌ Ralat semak Admin Profile: '+(error.message||'Ralat database');
     await supabaseClient.auth.signOut();
     currentAuth=null;
     updateAuthUI();
     showLoginGate();
-    const st=document.getElementById('adminLoginStatus');
-    if(st)st.textContent='❌ Akaun ini bukan Admin Manager yang dibenarkan.';
     return false;
   }
+
+  if(!data){
+    if(st)st.textContent='❌ Akaun berjaya login, tetapi profile Admin belum didaftarkan.';
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
+  if(data.active!==true){
+    if(st)st.textContent='❌ Akaun Admin ini tidak aktif.';
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
+  if(data.role!=='owner' && data.role!=='manager'){
+    if(st)st.textContent='❌ Role Admin tidak sah: '+String(data.role||'-');
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
   return true;
 }
+ 
 async function requireAdminSession(){
   const {data}=await supabaseClient.auth.getSession();
   currentAuth=data?.session||null;

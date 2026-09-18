@@ -98,6 +98,136 @@ main{margin-left:250px;padding-top:76px;min-height:100vh}
 @media(min-width:901px){nav{display:none}}
 @media(max-width:560px){.dash-grid{grid-template-columns:1fr 1fr}.dash-stat{min-height:105px;padding:13px}.dash-stat .n{font-size:27px}.booking-section-head{font-size:18px}.booking-actions button{flex:1}.booking-value{display:block}}
 </style>
+<style id="agent-mobile-fix">
+ /* AGENT MOBILE RESPONSIVE */
+
+@media(max-width:900px){
+
+  #agents .wrap{
+    width:100%;
+    max-width:none;
+    padding:14px 12px;
+  }
+
+  #agents .section-title{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+
+  #agents .section-title h2{
+    font-size:25px;
+  }
+
+  #agents .section-title .btn{
+    width:100%;
+    text-align:center;
+  }
+
+  #agents .summarybox{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  #agents #authUserLabel{
+    float:none!important;
+    display:block;
+    margin-top:6px;
+    word-break:break-all;
+  }
+
+  #agents .summarybox button{
+    float:none!important;
+    margin:10px 0 0!important;
+    width:100%;
+  }
+
+  #agents #agentManager{
+    width:100%;
+    padding:14px!important;
+  }
+
+  #agents #agentManager .client-fields{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+
+  #agents #agentManager .field{
+    grid-column:1!important;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:5px;
+  }
+
+  #agents #agentManager .field label{
+    font-size:14px;
+  }
+
+  #agents #agentManager .field input,
+  #agents #agentManager .field select{
+    width:100%;
+    min-height:44px;
+    padding:10px;
+    box-sizing:border-box;
+  }
+
+  #agents #agentManager>div:last-of-type{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:8px!important;
+  }
+
+  #agents #agentManager>div:last-of-type .btn{
+    width:100%;
+    min-height:44px;
+  }
+
+  #agents #agentGrid.catalog-grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    width:100%!important;
+  }
+
+  #agents #agentGrid .catalog-admin-card{
+    width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box;
+  }
+
+  #agents #agentGrid .catalog-admin-card .ci{
+    padding:14px!important;
+  }
+
+  #agents #agentGrid .catalog-admin-actions{
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:8px!important;
+  }
+
+  #agents #agentGrid .catalog-admin-actions button{
+    width:100%;
+    min-height:42px;
+  }
+}
+
+@media(max-width:560px){
+
+  #agents .section-title h2{
+    font-size:23px;
+  }
+
+  #agents #agentManager>div:last-of-type{
+    grid-template-columns:1fr!important;
+  }
+
+  #agents #agentGrid .catalog-admin-actions{
+    grid-template-columns:1fr 1fr!important;
+  }
+}
+</style>
 </head><body><div id="liveNotif"><div class="notif-title">🔔 Booking Baru Masuk!</div><div class="notif-text" id="liveNotifText">Ada booking baru dari website Customer.</div></div>
 
 

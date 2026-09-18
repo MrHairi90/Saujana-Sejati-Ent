@@ -160,7 +160,10 @@ main{margin-left:250px;padding-top:76px;min-height:100vh}
       <div class="field"><label>No. WhatsApp :</label><input id="agentPhone" placeholder="01X-XXXXXXX"></div>
       <div class="field"><label>Kod URL :</label><input id="agentSlug" placeholder="contoh: ahmad" pattern="[a-z0-9-]+"></div>
       <div class="field"><label>Status :</label><select id="agentActive"><option value="true">Aktif</option><option value="false">Tidak aktif</option></select></div>
-    </div>
+   <div class="field"><label>Email Login :</label><input id="agentEmail" type="email" autocomplete="off" placeholder="agent@email.com"></div>
+<div class="field"><label>Password Sementara :</label><input id="agentPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Minimum 8 aksara"></div>
+   
+   </div>
     <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><button class="btn" style="background:#666" onclick="closeAgentManager()">Batal</button><button class="btn red" onclick="saveAgent()">💾 Simpan Agent</button></div>
     <div id="agentStatus" class="muted" style="margin-top:8px"></div>
   </div>
@@ -616,12 +619,135 @@ function showLoginGate(){
 function hideLoginGate(){const g=document.getElementById('adminLoginGate');if(g)g.style.display='none'}
 async function adminLogin(){const email=document.getElementById('adminEmail').value.trim();const password=document.getElementById('adminPassword').value;const st=document.getElementById('adminLoginStatus');st.textContent='⏳ Mengesahkan...';const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){st.textContent='❌ '+error.message;return}currentAuth=data.session;updateAuthUI();if(!(await verifyAdminProfile()))return;hideLoginGate();alert('Log masuk berjaya.');loadAgents();renderData();loadCatalogAdmin()}
 async function adminLogout(){await supabaseClient.auth.signOut();currentAuth=null;showLoginGate()}
-async function openAgentManager(item=null){if(!currentAuth){showLoginGate();return;}editingAgentId=item?.id||null;document.getElementById('agentManager').style.display='block';document.getElementById('agentName').value=item?.name||'';document.getElementById('agentPhone').value=item?.phone||'';document.getElementById('agentSlug').value=item?.slug||'';document.getElementById('agentActive').value=String(item?.active!==false);document.getElementById('agentStatus').textContent=editingAgentId?'Mode edit.':'Agent baharu.';window.scrollTo({top:0,behavior:'smooth'})}
+async function openAgentManager(item=null){
+  if(!currentAuth){
+    showLoginGate();
+    return;
+  }
+
+  editingAgentId=item?.id||null;
+
+  document.getElementById('agentManager').style.display='block';
+  document.getElementById('agentName').value=item?.name||'';
+  document.getElementById('agentPhone').value=item?.phone||'';
+  document.getElementById('agentSlug').value=item?.slug||'';
+  document.getElementById('agentActive').value=String(item?.active!==false);
+
+  document.getElementById('agentEmail').value='';
+  document.getElementById('agentPassword').value='';
+
+  document.getElementById('agentEmail').required=!editingAgentId;
+  document.getElementById('agentPassword').required=!editingAgentId;
+
+  document.getElementById('agentStatus').textContent=
+    editingAgentId
+      ? 'Mode edit — Email/Password dikosongkan kerana login tidak diubah di sini.'
+      : 'Agent baharu — Email dan Password diperlukan untuk Agent Login.';
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function closeAgentManager(){editingAgentId=null;document.getElementById('agentManager').style.display='none'}
 async function loadAgents(){if(!currentAuth)return;const {data,error}=await supabaseClient.from('agents').select('id,name,phone,slug,active,created_at').order('created_at',{ascending:true});if(error){document.getElementById('agentGrid').innerHTML='<div class="project-item">❌ '+esc(error.message)+'</div>';return}renderAgents(data||[])}
 function renderAgents(arr){const active=arr.filter(x=>x.active!==false);const c=document.getElementById('agentCount');if(c)c.textContent=active.length+'/10 agent aktif';const g=document.getElementById('agentGrid');if(!arr.length){g.innerHTML='<div class="project-item">Belum ada agent. Tekan “Daftar Agent”.</div>';return}const base='https://mrhairi90.github.io/Saujana-Sejati-Customer/?agent=';g.innerHTML=arr.map(a=>{const url=base+encodeURIComponent(a.slug);return `<article class="catalog-admin-card ${a.active===false?'cat-off':''}"><div class="ci"><span class="cat-pill">${a.active===false?'TIDAK AKTIF':'AKTIF'}</span><h3>${esc(a.name)}</h3><div class="muted">WhatsApp: ${esc(a.phone||'-')}</div><div class="muted" style="word-break:break-all;margin-top:5px">${esc(url)}</div><div class="catalog-admin-actions"><button style="background:#e9eef8;color:#126bd6" onclick='openAgentManager(${JSON.stringify(a).replace(/'/g,"&#39;")})'>✏️ Edit</button><button style="background:#eef8f1;color:#087f45" onclick="copyAgentUrl('${escAttr(url)}')">🔗 Salin URL</button><button style="background:#fff0e0;color:#8b5c00" onclick="showAgentQR('${escAttr(url)}','${escAttr(a.name)}')">▣ QR</button><button style="background:#ffe8e8;color:#c00" onclick="deactivateAgent('${escAttr(a.id)}',${a.active!==false})">${a.active===false?'♻️ Aktifkan':'🗑️ Padam'}</button></div></div></article>`}).join('')}
 function escAttr(s){return String(s??'').replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;')}
-async function saveAgent(){if(!currentAuth){showLoginGate();return;}const name=document.getElementById('agentName').value.trim();const phone=document.getElementById('agentPhone').value.trim();const slug=document.getElementById('agentSlug').value.trim().toLowerCase();const active=document.getElementById('agentActive').value==='true';const st=document.getElementById('agentStatus');if(!name||!phone||!/^[a-z0-9-]{2,30}$/.test(slug)){st.textContent='❌ Lengkapkan nama, nombor dan kod URL (huruf kecil/nombor/- sahaja).';return}st.textContent='⏳ Menyimpan...';const payload={name,phone,slug,active};const q=editingAgentId?supabaseClient.from('agents').update(payload).eq('id',editingAgentId):supabaseClient.from('agents').insert([payload]);const {error}=await q;if(error){st.textContent='❌ '+error.message;return}alert('Agent berjaya disimpan.');closeAgentManager();await loadAgents()}
+async function saveAgent(){
+  if(!currentAuth){
+    showLoginGate();
+    return;
+  }
+
+  const name=document.getElementById('agentName').value.trim();
+  const phone=document.getElementById('agentPhone').value.trim();
+  const slug=document.getElementById('agentSlug').value.trim().toLowerCase();
+  const active=document.getElementById('agentActive').value==='true';
+  const email=document.getElementById('agentEmail').value.trim().toLowerCase();
+  const password=document.getElementById('agentPassword').value;
+  const st=document.getElementById('agentStatus');
+
+  if(!name || !phone || !/^[a-z0-9-]{2,30}$/.test(slug)){
+    st.textContent='❌ Lengkapkan nama, nombor dan kod URL.';
+    return;
+  }
+
+  if(!editingAgentId){
+    if(!email || !password){
+      st.textContent='❌ Email Login dan Password diperlukan.';
+      return;
+    }
+
+    if(password.length<8){
+      st.textContent='❌ Password mesti sekurang-kurangnya 8 aksara.';
+      return;
+    }
+
+    if(!active){
+      st.textContent='❌ Agent baharu mesti Aktif.';
+      return;
+    }
+  }
+
+  st.textContent='⏳ Menyimpan...';
+
+  const payload={name,phone,slug,active};
+
+  if(editingAgentId){
+    const {error}=await supabaseClient
+      .from('agents')
+      .update(payload)
+      .eq('id',editingAgentId);
+
+    if(error){
+      st.textContent='❌ '+error.message;
+      return;
+    }
+
+    alert('Agent berjaya dikemaskini.');
+    closeAgentManager();
+    await loadAgents();
+    return;
+  }
+
+  const {data:agent,error:agentError}=await supabaseClient
+    .from('agents')
+    .insert([payload])
+    .select('id')
+    .single();
+
+  if(agentError || !agent){
+    st.textContent='❌ Gagal mencipta Agent: '+(agentError?.message||'ID Agent tidak diterima.');
+    return;
+  }
+
+  st.textContent='⏳ Agent dibuat. Mencipta akaun login...';
+
+  const {data:fnData,error:fnError}=await supabaseClient.functions.invoke(
+    'create-agent-user',
+    {
+      body:{
+        name,
+        email,
+        password,
+        agent_id:agent.id
+      }
+    }
+  );
+
+  if(fnError || fnData?.error){
+    await supabaseClient
+      .from('agents')
+      .delete()
+      .eq('id',agent.id);
+
+    const msg=fnData?.error || fnError?.message || 'Edge Function gagal.';
+    st.textContent='❌ '+msg;
+    return;
+  }
+
+  alert('Agent dan akaun login berjaya dicipta.\n\nEmail login: '+email);
+
+  closeAgentManager();
+  await loadAgents();
+}
 async function deactivateAgent(id,active){if(!currentAuth)return;if(active&&!confirm('Nyahaktifkan agent ini? Rekod booking lama akan kekal.'))return;const {error}=await supabaseClient.from('agents').update({active:!active}).eq('id',id);if(error){alert('Gagal ubah status agent: '+error.message);return}await loadAgents()}
 async function copyAgentUrl(url){await navigator.clipboard.writeText(url);alert('URL agent telah disalin.')}
 function showAgentQR(url,name){let m=document.getElementById('agentQRModal');if(!m){m=document.createElement('div');m.id='agentQRModal';m.className='modal';m.innerHTML='<div class="modal-card" style="max-width:430px;text-align:center;padding:20px"><button class="close" style="float:right" onclick="this.closest(\'.modal\').classList.remove(\'show\')">Tutup</button><h2 id="qrTitle"></h2><img id="qrImg" style="width:280px;height:280px;object-fit:contain;margin:15px auto;display:block"><p id="qrUrl" style="word-break:break-all;font-size:12px;color:#68707b"></p></div>';document.body.appendChild(m)}document.getElementById('qrTitle').textContent='QR Agent — '+name;document.getElementById('qrImg').src='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(url);document.getElementById('qrUrl').textContent=url;m.classList.add('show')}

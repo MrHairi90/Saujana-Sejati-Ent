@@ -333,7 +333,28 @@ const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY
 let websiteBookings=[];
 const navIds={home:'navHome',catalog:'navCatalog',quote:'navQuote',projects:'navProjects',dashboard:'navDashboard',agents:'navDashboard'};const money=n=>'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});const v=id=>parseFloat(document.getElementById(id).value)||0;const ids=['lowerL','lowerR','upperL','upperR','tvW','tvH','tvR','wardW','wardH','wardR','deposit'];
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(navIds[id]).classList.add('active');document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')renderData();if(id==='catalog')renderCatalog('Semua');if(id==='agents')loadAgents()}
-function wa(t){window.open('https://wa.me/601113232186?text='+encodeURIComponent(t),'_blank')}
+async function wa(t){
+  const params=new URLSearchParams(window.location.search);
+  const slug=(params.get('agent')||'').toLowerCase().trim();
+  let phone='601113232186';
+
+  if(slug){
+    const {data}=await supabaseClient
+      .from('agents')
+      .select('phone')
+      .eq('slug',slug)
+      .eq('active',true)
+      .maybeSingle();
+
+    if(data?.phone){
+      phone=String(data.phone).replace(/[^0-9]/g,'');
+      if(phone.startsWith('0')) phone='60'+phone.slice(1);
+      else if(!phone.startsWith('60')) phone='60'+phone;
+    }
+  }
+
+  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(t),'_blank');
+}
 function calc(){const lower=v('lowerL')*v('lowerR'),upper=v('upperL')*v('upperR'),tv=v('tvW')*v('tvH')*v('tvR'),ward=v('wardW')*v('wardH')*v('wardR'),total=lower+upper+tv+ward,dep=Math.min(v('deposit'),total);document.getElementById('lowerT').textContent=money(lower);document.getElementById('upperT').textContent=money(upper);document.getElementById('tvT').textContent=money(tv);document.getElementById('wardT').textContent=money(ward);document.getElementById('grand').textContent=money(total);document.getElementById('balance').textContent=money(total-dep)}
 function resetAll(){['name','phone','ic','address','notes','notes2'].forEach(id=>document.getElementById(id).value='');['lowerL','lowerR','upperL','upperR','tvW','tvH','wardW','wardH','wardR','deposit'].forEach(id=>document.getElementById(id).value=0);document.getElementById('tvR').value=60;document.getElementById('date').value=new Date().toISOString().slice(0,10);calc()}
 function saveQuote(){const d={id:Date.now(),name:document.getElementById('name').value||'Customer',phone:document.getElementById('phone').value,ic:document.getElementById('ic').value,address:document.getElementById('address').value,date:document.getElementById('date').value,total:document.getElementById('grand').textContent,deposit:document.getElementById('deposit').value,balance:document.getElementById('balance').textContent};let a=JSON.parse(localStorage.getItem('saujana_projects_v4')||'[]');a.unshift(d);localStorage.setItem('saujana_projects_v4',JSON.stringify(a));alert('Quotation berjaya disimpan.');showScreen('projects')}
@@ -625,14 +646,58 @@ if(error){alert('Status belum berjaya dikemaskini.\\n\\nRalat: '+(error.message|
 const b=websiteBookings.find(x=>String(x.id)===String(id));if(b)b.status=status;renderWebsiteBookings();
 }
 async function saveBookingFinance(id){
-const priceInput=document.getElementById('price-'+id), additionalInput=document.getElementById('additional-'+id), depositInput=document.getElementById('deposit-'+id);
-const value=parseFloat(priceInput?.value||0), additional=parseFloat(additionalInput?.value||0), deposit=parseFloat(depositInput?.value||0);
-const total=value+additional;
-if(value<0||additional<0||deposit<0||Number.isNaN(value)||Number.isNaN(additional)||Number.isNaN(deposit)){alert('Nilai jualan/nilai tambahan/deposit tidak sah.');return}
-if(deposit>total && total>0){alert('Deposit tidak boleh lebih tinggi daripada jumlah jualan + nilai tambahan.');return}
-const {error}=await supabaseClient.from('bookings').update({estimated_price:value,nilai_tambahan:additional,deposit:deposit}).eq('id',id);
-if(error){alert('Nilai jualan/nilai tambahan/deposit belum berjaya disimpan.\n\nRalat: '+(error.message||'Tidak diketahui'));return}
-const b=websiteBookings.find(x=>String(x.id)===String(id));if(b){b.estimated_price=value;b.nilai_tambahan=additional;b.deposit=deposit}renderWebsiteBookings();refreshDashboardTotals();
+  const b=requireAgentBookingAccess(id);
+  if(!b)return;
+
+  const priceInput=document.getElementById('price-'+id);
+  const additionalInput=document.getElementById('additional-'+id);
+  const depositInput=document.getElementById('deposit-'+id);
+
+  const value=parseFloat(priceInput?.value||0);
+  const additional=parseFloat(additionalInput?.value||0);
+  const deposit=parseFloat(depositInput?.value||0);
+  const total=value+additional;
+
+  if(
+    value<0||
+    additional<0||
+    deposit<0||
+    Number.isNaN(value)||
+    Number.isNaN(additional)||
+    Number.isNaN(deposit)
+  ){
+    alert('Nilai jualan/nilai tambahan/deposit tidak sah.');
+    return;
+  }
+
+  if(deposit>total && total>0){
+    alert('Deposit tidak boleh lebih tinggi daripada jumlah jualan + nilai tambahan.');
+    return;
+  }
+
+  const {error}=await supabaseClient
+    .from('bookings')
+    .update({
+      estimated_price:value,
+      nilai_tambahan:additional,
+      deposit:deposit
+    })
+    .eq('id',id);
+
+  if(error){
+    alert(
+      'Nilai jualan/nilai tambahan/deposit belum berjaya disimpan.\n\nRalat: '+
+      (error.message||'Tidak diketahui')
+    );
+    return;
+  }
+
+  b.estimated_price=value;
+  b.nilai_tambahan=additional;
+  b.deposit=deposit;
+
+  renderWebsiteBookings();
+  refreshDashboardTotals();
 }
 async function deleteBooking(id){if(window.currentUserRole==='agent'&&!requireAgentBookingAccess(id))return;
 if(!confirm('Padam booking yang telah dibatalkan ini? Tindakan ini tidak boleh dibuat semula.'))return;

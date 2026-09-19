@@ -787,7 +787,52 @@ function showLoginGate(){
   g.style.display='grid';
 }
 function hideLoginGate(){const g=document.getElementById('adminLoginGate');if(g)g.style.display='none'}
-async function adminLogin(){const email=document.getElementById('adminEmail').value.trim();const password=document.getElementById('adminPassword').value;const st=document.getElementById('adminLoginStatus');st.textContent='⏳ Mengesahkan...';const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){st.textContent='❌ '+error.message;return}currentAuth=data.session;updateAuthUI();if(!(await verifyAdminProfile()))return;hideLoginGate();alert('Log masuk berjaya.');loadAgents();renderData();loadCatalogAdmin()}
+async function adminLogin(){
+  const email=document.getElementById('adminEmail').value.trim();
+  const password=document.getElementById('adminPassword').value;
+  const st=document.getElementById('adminLoginStatus');
+
+  st.textContent='⏳ Mengesahkan...';
+
+  const {data,error}=await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if(error){
+    st.textContent='❌ '+error.message;
+    return;
+  }
+
+  currentAuth=data.session;
+  updateAuthUI();
+
+  if(!(await verifyAdminProfile()))return;
+
+  hideLoginGate();
+
+  if(window.currentUserRole==='agent'){
+    document.querySelector('.admin-sidebar').style.display='none';
+
+    ['navCatalog','navDashboard','navAgents'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.style.display='none';
+    });
+
+    alert('Log masuk Agent berjaya.');
+
+    showScreen('projects');
+    await renderData();
+
+    return;
+  }
+
+  alert('Log masuk Admin berjaya.');
+
+  loadAgents();
+  renderData();
+  loadCatalogAdmin();
+}
 async function adminLogout(){await supabaseClient.auth.signOut();currentAuth=null;showLoginGate()}
 async function openAgentManager(item=null){
   if(!currentAuth){

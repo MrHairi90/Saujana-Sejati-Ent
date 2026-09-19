@@ -616,70 +616,7 @@ document.body.appendChild(modal);
     saveEdit(true);
   };
 }
-  const b=websiteBookings.find(x=>String(x.id)===String(id));
-  if(!b)return;
-
-  const name=prompt('Nama Customer:',b.customer_name||'');
-  if(name===null)return;
-
-  const phone=prompt('No. WhatsApp:',b.phone||'');
-  if(phone===null)return;
-
-  const address=prompt('Alamat:',b.address||'');
-  if(address===null)return;
-
-  const type=prompt('Jenis Kabinet:',b.cabinet_type||'');
-  if(type===null)return;
-
-  const material=prompt('Material:',b.material||'');
-  if(material===null)return;
-
-  const measurement=prompt('Ukuran:',b.measurement||'');
-  if(measurement===null)return;
-
-  const date=prompt('Tarikh:',b.booking_date||'');
-  if(date===null)return;
-
-  const time=prompt('Masa:',b.booking_time||'');
-  if(time===null)return;
-
-  const notes=prompt('Catatan:',b.notes||'');
-  if(notes===null)return;
-
-  const {error}=await supabaseClient.from('bookings').update({
-    customer_name:name,
-    phone:phone,
-    address:address,
-    cabinet_type:type,
-    material:material,
-    measurement:measurement,
-    booking_date:date,
-    booking_time:time,
-    notes:notes
-  }).eq('id',id);
-
-  if(error){
-    alert('❌ Booking gagal dikemaskini.\\n\\nRalat: '+error.message);
-    return;
-  }
-
-  const b2=websiteBookings.find(x=>String(x.id)===String(id));
-  if(b2){
-    b2.customer_name=name;
-    b2.phone=phone;
-    b2.address=address;
-    b2.cabinet_type=type;
-    b2.material=material;
-    b2.measurement=measurement;
-    b2.booking_date=date;
-    b2.booking_time=time;
-    b2.notes=notes;
-  }
-
-  alert('✅ Maklumat booking berjaya dikemaskini.');
-  document.getElementById('v2DetailModal')?.remove();
-  renderWebsiteBookings();
-}
+ 
 async function updateBookingStatus(id,status){
 const {error}=await supabaseClient.from('bookings').update({status}).eq('id',id);
 if(error){alert('Status belum berjaya dikemaskini.\\n\\nRalat: '+(error.message||'Tidak diketahui'));return}

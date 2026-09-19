@@ -306,7 +306,7 @@ function setupBookingRealtime(){
 async function loadWebsiteBookings(){
 const badge=document.getElementById('newBookingBadge');if(badge){badge.dataset.count='0';badge.style.display='none';}
 const box=document.getElementById('websiteBookings'); if(box)box.innerHTML='<div class="booking-empty">⏳ Memuatkan booking Customer...</div>';
-const {data,error}=await supabaseClient.from('bookings').select('*').order('created_at',{ascending:false});
+const {data,error}=await supabaseClient.from('bookings').select('*').order('created_at',{ascending:false});console.log('BOOKING DATA ADMIN:',data);
 if(error){console.error(error);if(box)box.innerHTML='<div class="booking-empty">❌ Booking belum dapat dibaca. Semak RLS / permission table bookings.</div>';websiteBookings=[];return}
 websiteBookings=data||[];
 seenBookingIds=new Set(websiteBookings.map(x=>String(x.id)));

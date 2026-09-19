@@ -521,7 +521,26 @@ function getBookingAgentName(b){
   const id=getBookingAgentId(b);
   return id==='hairi'?'Hairi':id.replace(/[-_]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
 }
+function canAgentEditBooking(b){
+  if(window.currentUserRole!=='agent')return true;
 
+  const bookingAgent=String(getBookingAgentId(b)||'').toLowerCase().trim();
+  const loginAgent=String(window.currentAgentProfile?.agent_slug||'').toLowerCase().trim();
+
+  return bookingAgent===loginAgent;
+}
+
+function requireAgentBookingAccess(id){
+  const b=websiteBookings.find(x=>String(x.id)===String(id));
+  if(!b)return null;
+
+  if(!canAgentEditBooking(b)){
+    alert('❌ Akses ditolak.\n\nBooking ini bukan customer PIC anda.');
+    return null;
+  }
+
+  return b;
+}
 function renderWebsiteBookings(){
 const box=document.getElementById('websiteBookings');if(!box)return;
 const q=(document.getElementById('bookingSearch')?.value||'').trim().toLowerCase();
@@ -600,7 +619,7 @@ const modal=document.createElement('div');modal.className='modal show';modal.id=
 modal.innerHTML=`<div class="modal-card"><div class="modal-head"><h2>Detail Booking</h2><button class="close" onclick="document.getElementById('v2DetailModal')?.remove()">Tutup</button></div><div class="v2-detail-grid"><div class="v2-panel"><h4>👤 Maklumat Pelanggan</h4><p><b>Nama:</b> ${esc(b.customer_name||'-')}</p><p><b>WhatsApp:</b> ${esc(b.phone||'-')}</p><p><b>PIC:</b> ${esc(getBookingAgentName(b))}</p><p><b>Alamat:</b> ${esc(b.address||'-')}</p></div><div class="v2-panel"><h4>📋 Maklumat Projek</h4><p><b>Jenis:</b> ${esc(b.cabinet_type||'-')}</p><p><b>Material:</b> ${esc(b.material||'-')}</p><p><b>Ukuran:</b> ${esc(b.measurement||'-')}</p><p><b>Tarikh:</b> ${esc(b.booking_date||'-')} ${esc(b.booking_time||'')}</p></div><div class="v2-panel"><h4>➕ Aksesori</h4><p>${esc(acc)}</p><p><b>Catatan:</b> ${esc(b.notes||'-')}</p></div><div class="v2-panel"><h4>💰 Kewangan</h4><p>Nilai Jualan: <span class="v2-price">${money(jualan)}</span></p><p>Nilai Tambahan: <span class="v2-price">${money(tambahan)}</span></p><p>Jumlah: <span class="v2-price">${money(jumlah)}</span></p><p>Deposit: <b>${money(deposit)}</b></p><p>Baki: <b>${money(baki)}</b></p></div><div class="v2-panel"><h4>🔖 Status</h4><p>${esc((b.status||'baru').toUpperCase())}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn green" onclick="waBooking('${b.id}')">WhatsApp Customer</button><button class="btn red" onclick="editBookingQuotation('${b.id}')">✏️ Edit Quotation</button><button class="btn blue" onclick="printBookingQuote('${b.id}')">🖨️ CETAK QUOTATION / PDF</button></div></div></div></div>`;
 document.body.appendChild(modal);
 }
-async function updateBookingStatus(id,status){
+async function updateBookingStatus(id,status){if(window.currentUserRole==='agent'&&!requireAgentBookingAccess(id))return;
 const {error}=await supabaseClient.from('bookings').update({status}).eq('id',id);
 if(error){alert('Status belum berjaya dikemaskini.\\n\\nRalat: '+(error.message||'Tidak diketahui'));return}
 const b=websiteBookings.find(x=>String(x.id)===String(id));if(b)b.status=status;renderWebsiteBookings();
@@ -615,8 +634,7 @@ const {error}=await supabaseClient.from('bookings').update({estimated_price:valu
 if(error){alert('Nilai jualan/nilai tambahan/deposit belum berjaya disimpan.\n\nRalat: '+(error.message||'Tidak diketahui'));return}
 const b=websiteBookings.find(x=>String(x.id)===String(id));if(b){b.estimated_price=value;b.nilai_tambahan=additional;b.deposit=deposit}renderWebsiteBookings();refreshDashboardTotals();
 }
-async function saveBookingPrice(id){return saveBookingFinance(id)}
-async function deleteBooking(id){
+async function deleteBooking(id){if(window.currentUserRole==='agent'&&!requireAgentBookingAccess(id))return;
 if(!confirm('Padam booking yang telah dibatalkan ini? Tindakan ini tidak boleh dibuat semula.'))return;
 const {error}=await supabaseClient.from('bookings').delete().eq('id',id);
 if(error){alert('Booking belum berjaya dipadam.\n\nRalat: '+(error.message||'Tidak diketahui'));return}
@@ -643,7 +661,7 @@ if(list){
 }
 }
 function waBooking(id){
-const b=websiteBookings.find(x=>String(x.id)===String(id));if(!b)return;
+const b=requireAgentBookingAccess(id);if(!b)return;
 const acc=Array.isArray(b.accessories)?b.accessories.join(', '):(b.accessories||'-');
 let customerPhone=String(b.phone||'').replace(/[^0-9+]/g,'');
 if(customerPhone.startsWith('+60'))customerPhone=customerPhone.slice(1);
@@ -765,11 +783,32 @@ async function verifyAdminProfile(){
     return false;
   }
 
-  // 3. SIMPAN INFO AGENT YANG LOGIN
-  window.currentUserRole='agent';
-  window.currentAgentProfile=agent;
+  // 3. AMBIL SLUG AGENT UNTUK SEMAK PIC BOOKING
+const {data:agentData,error:agentDataError}=await supabaseClient
+  .from('agents')
+  .select('id,name,slug,active')
+  .eq('id',agent.agent_id)
+  .maybeSingle();
 
-  return true;
+if(agentDataError || !agentData){
+  if(st)st.textContent='❌ Maklumat Agent tidak dapat ditemui.';
+
+  await supabaseClient.auth.signOut();
+  currentAuth=null;
+  updateAuthUI();
+  showLoginGate();
+  return false;
+}
+
+// SIMPAN INFO AGENT YANG LOGIN
+window.currentUserRole='agent';
+window.currentAgentProfile={
+  ...agent,
+  agent_slug:String(agentData.slug||'').toLowerCase().trim(),
+  agent_name:agentData.name
+};
+
+return true;
 }
  
  

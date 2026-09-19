@@ -333,8 +333,7 @@ const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY
 let websiteBookings=[];
 const navIds={home:'navHome',catalog:'navCatalog',quote:'navQuote',projects:'navProjects',dashboard:'navDashboard',agents:'navAgents'};const money=n=>'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});const v=id=>parseFloat(document.getElementById(id).value)||0;const ids=['lowerL','lowerR','upperL','upperR','tvW','tvH','tvR','wardW','wardH','wardR','deposit'];
 function showScreen(id){
- if(id==='agents'&&window.currentUserRole!=='admin'){
-// async function wa(t){
+  if(id==='agents'&&window.currentUserRole!=='admin'){
     id='projects';
   }
 
@@ -349,6 +348,7 @@ function showScreen(id){
   if(id==='catalog')renderCatalog('Semua');
   if(id==='agents')loadAgents();
 }
+  
 
 async function wa(t){
   const params=new URLSearchParams(window.location.search);

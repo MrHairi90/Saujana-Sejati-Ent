@@ -686,6 +686,94 @@ async function verifyAdminProfile(){
   if(!currentAuth)return false;
 
   const st=document.getElementById('adminLoginStatus');
+  const userId=currentAuth.user.id;
+
+  // 1. SEMAK ADMIN DAHULU
+  const {data:admin,error:adminError}=await supabaseClient
+    .from('admin_profiles')
+    .select('id,name,role,active')
+    .eq('id',userId)
+    .maybeSingle();
+
+  if(adminError){
+    console.error('Admin profile query error:',adminError);
+  }
+
+  if(admin){
+    if(admin.active!==true){
+      if(st)st.textContent='❌ Akaun Admin ini tidak aktif.';
+      await supabaseClient.auth.signOut();
+      currentAuth=null;
+      updateAuthUI();
+      showLoginGate();
+      return false;
+    }
+
+    if(admin.role!=='owner' && admin.role!=='manager'){
+      if(st)st.textContent='❌ Role Admin tidak sah.';
+      await supabaseClient.auth.signOut();
+      currentAuth=null;
+      updateAuthUI();
+      showLoginGate();
+      return false;
+    }
+
+    window.currentUserRole='admin';
+    window.currentAgentProfile=null;
+
+    return true;
+  }
+
+  // 2. JIKA BUKAN ADMIN, SEMAK AGENT
+  const {data:agent,error:agentError}=await supabaseClient
+    .from('agent_profiles')
+    .select('id,agent_id,auth_user_id,name,active')
+    .eq('auth_user_id',userId)
+    .maybeSingle();
+
+  if(agentError){
+    console.error('Agent profile query error:',agentError);
+
+    if(st)st.textContent=
+      '❌ Ralat semak Agent Profile: '+(agentError.message||'Ralat database');
+
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
+  if(!agent){
+    if(st)st.textContent=
+      '❌ Akaun berjaya login, tetapi profile Admin/Agent belum didaftarkan.';
+
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
+  if(agent.active!==true){
+    if(st)st.textContent='❌ Akaun Agent ini tidak aktif.';
+
+    await supabaseClient.auth.signOut();
+    currentAuth=null;
+    updateAuthUI();
+    showLoginGate();
+    return false;
+  }
+
+  // 3. SIMPAN INFO AGENT YANG LOGIN
+  window.currentUserRole='agent';
+  window.currentAgentProfile=agent;
+
+  return true;
+}
+  if(!currentAuth)return false;
+
+  const st=document.getElementById('adminLoginStatus');
 
   const {data,error}=await supabaseClient
     .from('admin_profiles')

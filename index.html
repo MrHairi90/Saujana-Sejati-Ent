@@ -332,14 +332,31 @@ const SUPABASE_PUBLISHABLE_KEY="sb_publishable_F_JX1g6axQQBZUJTVRCqUA_fEc5YsA2";
 const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
 let websiteBookings=[];
 const navIds={home:'navHome',catalog:'navCatalog',quote:'navQuote',projects:'navProjects',dashboard:'navDashboard',agents:'navAgents'};const money=n=>'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});const v=id=>parseFloat(document.getElementById(id).value)||0;const ids=['lowerL','lowerR','upperL','upperR','tvW','tvH','tvR','wardW','wardH','wardR','deposit'];
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(navIds[id]).classList.add('active');document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='projects'||id==='dashboard')renderData();if(id==='catalog')renderCatalog('Semua');if(id==='agents')loadAgents()}
+function showScreen(id){
+ if(id==='agents'&&window.currentUserRole!=='admin'){
+// async function wa(t){
+    id='projects';
+  }
+
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(navIds[id]).classList.add('active');
+  document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  if(id==='projects'||id==='dashboard')renderData();
+  if(id==='catalog')renderCatalog('Semua');
+  if(id==='agents')loadAgents();
+}
+
 async function wa(t){
   const params=new URLSearchParams(window.location.search);
   const slug=(params.get('agent')||'').toLowerCase().trim();
   let phone='601113232186';
 
-  try{
-    if(slug){
+  if(slug){
+    try{
       const {data}=await supabaseClient
         .from('agents')
         .select('phone')
@@ -349,15 +366,18 @@ async function wa(t){
 
       if(data?.phone){
         phone=String(data.phone).replace(/[^0-9]/g,'');
-        if(phone.startsWith('0')) phone='60'+phone.slice(1);
-        else if(!phone.startsWith('60')) phone='60'+phone;
+        if(phone.startsWith('0'))phone='60'+phone.slice(1);
+        else if(!phone.startsWith('60'))phone='60'+phone;
       }
+    }catch(e){
+      console.warn('WhatsApp agent routing gagal, guna nombor utama.',e);
     }
-  }catch(e){
-    console.warn('WhatsApp agent routing gagal, guna nombor utama.',e);
   }
 
-  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(t),'_blank');
+  window.open(
+    'https://wa.me/'+phone+'?text='+encodeURIComponent(t),
+    '_blank'
+  );
 }
 function calc(){const lower=v('lowerL')*v('lowerR'),upper=v('upperL')*v('upperR'),tv=v('tvW')*v('tvH')*v('tvR'),ward=v('wardW')*v('wardH')*v('wardR'),total=lower+upper+tv+ward,dep=Math.min(v('deposit'),total);document.getElementById('lowerT').textContent=money(lower);document.getElementById('upperT').textContent=money(upper);document.getElementById('tvT').textContent=money(tv);document.getElementById('wardT').textContent=money(ward);document.getElementById('grand').textContent=money(total);document.getElementById('balance').textContent=money(total-dep)}
 function resetAll(){['name','phone','ic','address','notes','notes2'].forEach(id=>document.getElementById(id).value='');['lowerL','lowerR','upperL','upperR','tvW','tvH','wardW','wardH','wardR','deposit'].forEach(id=>document.getElementById(id).value=0);document.getElementById('tvR').value=60;document.getElementById('date').value=new Date().toISOString().slice(0,10);calc()}

@@ -657,7 +657,7 @@ function printBookingQuote(id){
 }
 
 function showBookingDetail(id){
-const b=websiteBookings.find(x=>String(x.id)===String(id));if(!b)return;
+const b=requireAgentBookingAccess(id);if(!b)return;
 const acc=Array.isArray(b.accessories)?b.accessories.join(', '):(b.accessories||'-');
 const jualan=Number(b.estimated_price||0), tambahan=Number(b.nilai_tambahan||0), deposit=Number(b.deposit||0), jumlah=jualan+tambahan, baki=Math.max(0,jumlah-deposit);
 const modal=document.createElement('div');modal.className='modal show';modal.id='v2DetailModal';

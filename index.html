@@ -365,6 +365,257 @@ modal.innerHTML=`<div class="modal-card"><div class="modal-head"><h2>Detail Book
 document.body.appendChild(modal);
 }
  async function editBooking(id){
+  const b=requireAgentBookingAccess(id);
+  if(!b)return;
+
+  const acc=Array.isArray(b.accessories)?b.accessories.join(', '):(b.accessories||'');
+  const jualan=Number(b.estimated_price||0);
+  const tambahan=Number(b.nilai_tambahan||0);
+  const deposit=Number(b.deposit_amount??b.deposit??0);
+
+  const modal=document.createElement('div');
+  modal.className='modal show';
+  modal.id='editBookingModal';
+
+  modal.innerHTML=`
+    <div class="modal-card" style="max-width:850px;width:95%">
+      <div class="modal-head">
+        <h2>✏️ Edit Booking</h2>
+        <button class="close" id="editCloseBtn">Tutup</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+
+        <div class="v2-panel">
+          <h4>👤 Maklumat Customer</h4>
+
+          <label>Nama Customer</label>
+          <input id="editName" type="text" value="${esc(b.customer_name||'')}">
+
+          <label>No. WhatsApp</label>
+          <input id="editPhone" type="text" value="${esc(b.phone||'')}">
+
+          <label>Alamat</label>
+          <textarea id="editAddress" rows="3">${esc(b.address||'')}</textarea>
+        </div>
+
+        <div class="v2-panel">
+          <h4>🗎 Maklumat Projek</h4>
+
+          <label>Jenis Kabinet</label>
+          <input id="editType" type="text" value="${esc(b.cabinet_type||'')}">
+
+          <label>Material</label>
+          <input id="editMaterial" type="text" value="${esc(b.material||'')}">
+
+          <label>Ukuran</label>
+          <input id="editMeasurement" type="text" value="${esc(b.measurement||'')}">
+        </div>
+
+        <div class="v2-panel">
+          <h4>📅 Tarikh & Masa</h4>
+
+          <label>Tarikh</label>
+          <input id="editDate" type="date" value="${esc(b.booking_date||'')}">
+
+          <label>Masa</label>
+          <input id="editTime" type="time" value="${esc(b.booking_time||'')}">
+
+          <label>Aksesori</label>
+          <input id="editAccessories" type="text"
+            value="${esc(acc)}"
+            placeholder="Contoh: Rak pinggan, Rak botol">
+        </div>
+
+        <div class="v2-panel">
+          <h4>💰 Kewangan</h4>
+
+          <label>Nilai Jualan (RM)</label>
+          <input id="editPrice" type="number" min="0" step="0.01" value="${jualan}">
+
+          <label>Nilai Tambahan (RM)</label>
+          <input id="editAdditional" type="number" min="0" step="0.01" value="${tambahan}">
+
+          <label>Deposit (RM)</label>
+          <input id="editDeposit" type="number" min="0" step="0.01" value="${deposit}">
+
+          <div id="editFinanceSummary"
+               style="margin-top:10px;font-weight:900">
+          </div>
+        </div>
+
+        <div class="v2-panel" style="grid-column:1/-1">
+          <h4>📝 Catatan</h4>
+          <textarea id="editNotes" rows="3">${esc(b.notes||'')}</textarea>
+        </div>
+
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;
+                  flex-wrap:wrap;margin-top:15px">
+
+        <button class="btn" id="editCancelBtn"
+                style="background:#666">
+          Batal
+        </button>
+
+        <button class="btn green" id="editSaveBtn">
+          💾 Simpan Perubahan
+        </button>
+
+        <button class="btn blue" id="editSavePrintBtn">
+          🖨️ Simpan & Cetak Quotation
+        </button>
+
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const priceInput=document.getElementById('editPrice');
+  const additionalInput=document.getElementById('editAdditional');
+  const depositInput=document.getElementById('editDeposit');
+  const summary=document.getElementById('editFinanceSummary');
+
+  function updateFinanceSummary(){
+    const p=parseFloat(priceInput.value)||0;
+    const a=parseFloat(additionalInput.value)||0;
+    const d=parseFloat(depositInput.value)||0;
+    const total=p+a;
+    const baki=Math.max(0,total-d);
+
+    summary.innerHTML=
+      `Jumlah: ${money(total)} &nbsp; | &nbsp; Baki: ${money(baki)}`;
+  }
+
+  priceInput.addEventListener('input',updateFinanceSummary);
+  additionalInput.addEventListener('input',updateFinanceSummary);
+  depositInput.addEventListener('input',updateFinanceSummary);
+  updateFinanceSummary();
+
+  document.getElementById('editCloseBtn').onclick=()=>{
+    modal.remove();
+  };
+
+  document.getElementById('editCancelBtn').onclick=()=>{
+    modal.remove();
+  };
+
+  async function saveEdit(printAfterSave=false){
+
+    const name=document.getElementById('editName').value.trim();
+    const phone=document.getElementById('editPhone').value.trim();
+    const address=document.getElementById('editAddress').value.trim();
+    const type=document.getElementById('editType').value.trim();
+    const material=document.getElementById('editMaterial').value.trim();
+    const measurement=document.getElementById('editMeasurement').value.trim();
+    const date=document.getElementById('editDate').value;
+    const time=document.getElementById('editTime').value;
+    const notes=document.getElementById('editNotes').value.trim();
+
+    const accessoriesText=
+      document.getElementById('editAccessories').value.trim();
+
+    const accessories=accessoriesText
+      ? accessoriesText.split(',')
+          .map(x=>x.trim())
+          .filter(Boolean)
+      : [];
+
+    const estimatedPrice=
+      parseFloat(document.getElementById('editPrice').value)||0;
+
+    const additional=
+      parseFloat(document.getElementById('editAdditional').value)||0;
+
+    const deposit=
+      parseFloat(document.getElementById('editDeposit').value)||0;
+
+    const total=estimatedPrice+additional;
+
+    if(deposit>total){
+      alert(
+        '⚠️ Deposit tidak boleh lebih daripada jumlah jualan.\n\n'+
+        'Jumlah: '+money(total)+'\n'+
+        'Deposit: '+money(deposit)
+      );
+      return;
+    }
+
+    const {error}=await supabaseClient
+      .from('bookings')
+      .update({
+        customer_name:name,
+        phone:phone,
+        address:address,
+        cabinet_type:type,
+        material:material,
+        measurement:measurement,
+        booking_date:date,
+        booking_time:time,
+        accessories:accessories,
+        notes:notes||null,
+        estimated_price:estimatedPrice,
+        nilai_tambahan:additional,
+
+        /* Simpan kedua-dua untuk keserasian sistem lama & baru */
+        deposit_amount:deposit,
+        deposit:deposit
+      })
+      .eq('id',id);
+
+    if(error){
+      console.error(error);
+
+      alert(
+        '❌ Booking gagal dikemaskini.\n\nRalat: '+
+        error.message
+      );
+
+      return;
+    }
+
+    Object.assign(b,{
+      customer_name:name,
+      phone:phone,
+      address:address,
+      cabinet_type:type,
+      material:material,
+      measurement:measurement,
+      booking_date:date,
+      booking_time:time,
+      accessories:accessories,
+      notes:notes||null,
+      estimated_price:estimatedPrice,
+      nilai_tambahan:additional,
+      deposit_amount:deposit,
+      deposit:deposit
+    });
+
+    modal.remove();
+
+    document.getElementById('v2DetailModal')?.remove();
+
+    renderWebsiteBookings();
+
+    if(printAfterSave){
+      setTimeout(()=>{
+        printBookingQuote(id);
+      },150);
+    }else{
+      alert('✅ Booking berjaya dikemaskini.');
+    }
+  }
+
+  document.getElementById('editSaveBtn').onclick=()=>{
+    saveEdit(false);
+  };
+
+  document.getElementById('editSavePrintBtn').onclick=()=>{
+    saveEdit(true);
+  };
+}
   const b=websiteBookings.find(x=>String(x.id)===String(id));
   if(!b)return;
 

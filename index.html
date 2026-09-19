@@ -337,16 +337,7 @@ function showScreen(id){
     id='projects';
   }
 
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById(navIds[id]).classList.add('active');
-  document.querySelectorAll('.admin-sidebar [data-side]').forEach(x=>x.classList.toggle('active',x.getAttribute('data-side')===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(id==='projects'||id==='dashboard')renderData();
-  if(id==='catalog')renderCatalog('Semua');
-  if(id==='agents')loadAgents();
-}
+  async function wa(t){
   const params=new URLSearchParams(window.location.search);
   const slug=(params.get('agent')||'').toLowerCase().trim();
   let phone='601113232186';
@@ -364,6 +355,10 @@ function showScreen(id){
       if(phone.startsWith('0')) phone='60'+phone.slice(1);
       else if(!phone.startsWith('60')) phone='60'+phone;
     }
+  }
+
+  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(t),'_blank');
+}
   }
 
   window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(t),'_blank');

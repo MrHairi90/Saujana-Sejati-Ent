@@ -961,7 +961,20 @@ async function adminLogin(){
   renderData();
   loadCatalogAdmin();
 }
-async function adminLogout(){await supabaseClient.auth.signOut();currentAuth=null;showLoginGate()}
+async function adminLogout(){
+  try{
+    await supabaseClient.auth.signOut();
+  }catch(e){
+    console.error('Logout error:',e);
+  }
+
+  currentAuth=null;
+  window.currentUserRole=null;
+  window.currentAgentProfile=null;
+
+  updateAuthUI();
+  showLoginGate();
+}
 async function openAgentManager(item=null){
   if(!currentAuth){
     showLoginGate();

@@ -1,0 +1,387 @@
+<!doctype html><html lang="ms"><head>
+<base href="https://SaujanaSejati.github.io/Saujana-Sejati-Customer/"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111"><title>Saujana Sejati Ent — Customer</title><style>:root{--r:#e50914;--dark:#111;--ink:#16191c;--green:#087f45}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:#fff;padding-bottom:76px}.top{background:#111;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between}.logo{width:190px;height:70px;object-fit:contain}.wa{background:#111;border:2px solid var(--r);color:#fff;border-radius:10px;padding:10px 14px;font-weight:900}.wrap{max-width:1100px;margin:auto;padding:14px}.hero{min-height:390px;background:linear-gradient(90deg,#fff 0%,#fffdf0e8 38%,transparent 76%),url('kabinet-dapur-01.jpg') center/cover;border-radius:0 0 16px 16px;display:flex;align-items:center}.hero-copy{padding:30px;max-width:620px}.eyebrow{font-size:13px;letter-spacing:3px;font-weight:900}.hero h1{font-size:clamp(42px,7vw,70px);line-height:.98;margin:10px 0}.hero h1 span{color:var(--r)}.hero p{font-size:19px}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:8px;padding:12px 18px;font-weight:900;color:#fff}.red{background:var(--r)}.green{background:var(--green)}.screen{display:none}.screen.active{display:block}.title{display:flex;justify-content:space-between;align-items:end;margin:16px 0 10px}.title h2{margin:0;font-size:28px}.muted{color:#68707b;font-size:13px}.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.cat{height:190px;border:1px solid #ddd;border-radius:11px;overflow:hidden;position:relative;cursor:pointer}.cat img{width:100%;height:100%;object-fit:cover}.cat:after{content:'';position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#000d)}.cat-info{position:absolute;z-index:2;bottom:12px;left:13px;color:#fff}.cat-info h3{margin:0 0 3px}.formbox{border:1px solid #d4d8dc;border-radius:12px;background:#fff;box-shadow:0 3px 12px #00000012;margin-top:12px;overflow:hidden}.head{background:linear-gradient(90deg,#202428,#101214);color:#fff;padding:11px 13px;font-size:18px;font-weight:900}.body{padding:14px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-weight:900;margin-bottom:5px}.field input,.field select{width:100%;border:1px solid #b8c0c7;border-radius:7px;padding:10px;background:#fff}.result{margin-top:14px;border-radius:10px;background:#fff0f1;border:1px solid #ffc5c8;padding:14px;text-align:center}.result .label{font-weight:900;color:#555}.price{font-size:32px;font-weight:900;color:var(--r);margin-top:3px}.note{margin-top:8px;font-size:12px;color:#68707b;text-align:center}.catalog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.item{border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#fff}.item img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer}.item div{padding:10px;font-weight:900}.contact{margin-top:16px;background:linear-gradient(90deg,#8b0000,var(--r),#111);color:#fff;padding:14px;text-align:center;font-weight:900}.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:#111;display:grid;grid-template-columns:repeat(3,1fr);box-shadow:0 -4px 16px #0004}.nav button{border:0;background:#111;color:#fff;padding:10px 4px 12px;font-weight:900;border-top:4px solid transparent}.nav button.active{border-top-color:var(--r);background:#181818}.navico{display:block;font-size:21px;margin-bottom:2px}.modal{position:fixed;inset:0;background:#000b;z-index:100;display:none;padding:16px;overflow:auto}.modal.show{display:flex;align-items:center;justify-content:center}.modal-card{max-width:1000px;width:96vw;background:#111;border-radius:12px;overflow:hidden}.modal-head{color:#fff;padding:12px 15px;display:flex;justify-content:space-between;align-items:center}.preview-img{display:block;width:100%;max-height:82vh;object-fit:contain}.close{border:0;background:var(--r);color:#fff;border-radius:7px;padding:8px 12px;font-weight:900}@media(max-width:800px){.cat-grid{grid-template-columns:1fr 1fr}.catalog-grid{grid-template-columns:1fr 1fr}.fields{grid-template-columns:1fr}.logo{width:150px;height:60px}.hero{min-height:430px}.hero-copy{padding:22px 16px}}@media(max-width:500px){.cat{height:165px}.item img{height:160px}.wa{font-size:11px;padding:8px}.hero h1{font-size:45px}}
+.booking-hero{min-height:360px;background:linear-gradient(90deg,#090909dd,#1119),url('kabinet-dapur-01.jpg') center/cover;display:flex;align-items:flex-end;color:#fff}.booking-overlay{width:100%;max-width:1100px;margin:auto;padding:34px 28px 30px}.booking-eyebrow{color:#ff2028;font-size:20px;font-weight:900;letter-spacing:1px}.booking-hero h1{font-size:clamp(40px,7vw,68px);line-height:.92;margin:7px 0 14px;font-weight:1000}.booking-hero h1 span{color:#fff}.booking-hero p{font-size:18px;max-width:650px;margin:0 0 22px}.booking-benefits{display:flex;gap:34px;flex-wrap:wrap}.booking-benefits div{display:flex;align-items:center;gap:10px;font-weight:900}.booking-benefits b{font-size:28px;color:#ffd21c}.booking-wrap{margin-top:-1px}.booking-card{background:#fff;border-radius:18px;box-shadow:0 10px 35px #0002;border:1px solid #ddd;padding:25px;margin:0 auto;position:relative}.booking-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.booking-card-head h2{margin:0;font-size:28px}.booking-card-head span{background:#ffe8e9;color:#d51b22;border-radius:22px;padding:10px 16px;font-weight:900}.booking-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}.booking-fields .field label{font-weight:900;margin-bottom:6px}.booking-fields input,.booking-fields select,.booking-fields textarea{font:inherit;width:100%;border:1px solid #c7ccd2;border-radius:8px;padding:13px;background:#fff;outline:none}.booking-fields input:focus,.booking-fields select:focus,.booking-fields textarea:focus{border-color:#e50914;box-shadow:0 0 0 3px #e5091415}.booking-fields .full{grid-column:1/-1}.booking-wa{margin-top:20px;width:100%;border:0;border-radius:9px;background:#0aa34a;color:#fff;padding:16px;font-size:18px;font-weight:1000;cursor:pointer}.booking-wa span{font-size:28px;float:right;line-height:18px}.booking-safe{text-align:center;color:#59616b;font-size:13px;margin-top:15px}.booking-footer{background:#101214;color:#fff;display:flex;justify-content:center;align-items:center;gap:35px;padding:20px;flex-wrap:wrap}.booking-footer img{width:150px;height:65px;object-fit:contain}.booking-footer div{border-left:1px solid #666;padding-left:25px;display:flex;flex-direction:column;gap:5px}.booking-footer small{color:#ddd}.nav{grid-template-columns:repeat(4,1fr)}
+
+.booking-accessories{margin-top:20px;border:2px solid #ed1c24;border-radius:14px;background:#fff7f7;padding:18px}.booking-accessories h3{margin:0 0 7px;color:#e21b23;font-size:20px}.booking-accessories h3 span{font-size:13px;color:#555;font-weight:400}.booking-accessories p{margin:0 0 14px;color:#68707a;font-size:14px}.acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px 18px}.acc-grid label{font-weight:600}.acc-grid input[type=checkbox]{width:20px;height:20px;vertical-align:middle;margin-right:8px}.booking-accessories input[type=text]{width:100%;box-sizing:border-box;border:1px solid #c7ccd2;border-radius:8px;padding:13px;font:inherit;background:#fff}
+@media(max-width:700px){.acc-grid{grid-template-columns:1fr}}
+
+.color-picker-box{margin-top:4px;border:1px solid #d9dde2;border-radius:12px;padding:12px;background:#fafafa}.color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.color-choice{border:2px solid transparent;border-radius:10px;background:#fff;padding:8px 5px;cursor:pointer;text-align:center;font-weight:800;font-size:11px;color:#333}.color-choice .swatch{width:38px;height:38px;border-radius:50%;margin:0 auto 6px;border:1px solid #bbb;box-shadow:0 2px 5px #0002}.color-choice.selected{border-color:#e50914;box-shadow:0 0 0 2px #e5091430}.color-custom{display:flex;align-items:center;gap:10px;margin-top:10px;background:#fff;border:1px dashed #c7ccd2;border-radius:9px;padding:9px}.color-custom input[type=color]{width:48px;height:38px;border:0;padding:0;background:transparent}.color-selected{margin-top:8px;font-size:13px;color:#555}.color-selected b{color:#e50914}@media(max-width:700px){.color-grid{grid-template-columns:repeat(3,1fr)}}
+.catalog-color-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;margin-top:14px}.catalog-color-fields input{font:inherit;width:100%;border:1px solid #c7ccd2;border-radius:8px;padding:13px;background:#fff;outline:none}.catalog-color-fields input:focus{border-color:#e50914;box-shadow:0 0 0 3px #e5091415}@media(max-width:700px){.catalog-color-fields{grid-template-columns:1fr}}
+</style><style id="home-video-css">.home-video-section{background:linear-gradient(180deg,#fff,#f7f7f7);padding:20px 0}.home-video-card{background:#111;color:#fff;border-radius:18px;padding:10px;box-shadow:0 12px 35px #0002;overflow:hidden}.home-video-badge{display:inline-block;background:#e50914;color:#fff;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900;letter-spacing:1px}.home-video-card h2{font-size:28px;margin:10px 0 4px}.home-video-card p{color:#ccc;margin:0 0 14px}.home-video{width:100%;display:block;border-radius:12px;background:#000;max-height:620px;object-fit:contain}@media(max-width:600px){.home-video-card{border-radius:14px;padding:14px}.home-video-card h2{font-size:23px}}</style></head><body>
+<header class="top"><img class="logo" src="logo-saujana-sejati.jpg"><button class="wa" onclick="wa('Salam Saujana Sejati Ent, saya ingin bertanya tentang kabinet custom.')">WhatsApp</button></header>
+<section id="home" class="screen active"><div class="hero"><div class="hero-copy"><div class="eyebrow">SAUJANA SEJATI ENTERPRISE</div><h1>Rumah cantik,<br><span>kabinet kemas.</span></h1><p>Design custom ikut ruang, gaya dan pilihan material anda.</p><div class="actions"><button class="btn red" onclick="show('estimate')">Kira Anggaran ›</button><button class="btn green" onclick="wa('Salam Saujana Sejati Ent, saya berminat dengan kabinet custom.')">WhatsApp ›</button></div></div></div><div id="homeVideoDynamic" class="home-video-section" style="display:none"><div class="wrap"><div class="home-video-card"><video id="homeVideoPlayer" class="home-video" controls playsinline preload="metadata"></video></div></div></div><div class="wrap"><div class="title"><div><h2>Servis Kami</h2><div class="muted">Pilih kategori untuk lihat contoh design</div></div></div><div class="cat-grid">
+<div class="cat" onclick="openCatalog('Kabinet Dapur')"><img src="kabinet-dapur-01.jpg"><div class="cat-info"><h3>Kabinet Dapur</h3><div>Moden & kemas</div></div></div><div class="cat" onclick="openCatalog('Almari Bilik')"><img src="almari-bilik-01.jpg"><div class="cat-info"><h3>Almari Bilik</h3><div>Ikut ruang anda</div></div></div><div class="cat" onclick="openCatalog('Rak TV')"><img src="rak-tv-01.jpg"><div class="cat-info"><h3>Rak TV</h3><div>Moden & eksklusif</div></div></div><div class="cat" onclick="openCatalog('Bawah Tangga')"><img src="bawah-tangga-01.jpg"><div class="cat-info"><h3>Bawah Tangga</h3><div>Manfaatkan ruang</div></div></div></div><div class="contact">FREE UKURAN • FREE NASIHAT • TERUS DARI KILANG</div></div></section>
+<section id="catalog" class="screen"><div class="wrap"><div class="title"><div><h2>Katalog</h2><div class="muted">Contoh hasil kerja Saujana Sejati Ent</div></div><button class="btn red" onclick="show('estimate')">Kira Anggaran</button></div><div style="display:flex;gap:7px;overflow:auto;padding:4px 0 12px"><button class="btn red" onclick="renderCatalog('Semua')">Semua</button><button class="btn red" onclick="renderCatalog('Kabinet Dapur')">Kabinet Dapur</button><button class="btn red" onclick="renderCatalog('Rak TV')">Rak TV</button><button class="btn red" onclick="renderCatalog('Almari Bilik')">Almari Bilik</button><button class="btn red" onclick="renderCatalog('Panel Dinding')">Panel Dinding</button><button class="btn red" onclick="renderCatalog('Bawah Tangga')">Bawah Tangga</button></div><div id="catalogGrid" class="catalog-grid"></div></div></section>
+<section id="estimate" class="screen"><div class="wrap"><div class="title"><div><h2>Anggaran Harga</h2><div class="muted">Pilih material dan masukkan ukuran</div></div></div><div class="formbox"><div class="head">1 • PILIH JENIS KABINET</div><div class="body"><div class="fields"><div class="field"><label>Jenis</label><select id="type" onchange="updateForm()"><option value="lower">Kabinet Dapur Bawah</option><option value="upper">Kabinet Dapur Atas</option><option value="tv">Kabinet TV</option><option value="ward">Almari Bilik</option></select></div><div class="field"><label>Material</label><select id="material"></select></div></div></div></div><div class="formbox"><div class="head">2 • UKURAN</div><div class="body"><div id="measureFields" class="fields"></div><div class="result"><div class="label">ANGGARAN HARGA</div><div id="estimatePrice" class="price">RM 0.00</div></div><div class="note">* Harga di atas adalah anggaran sahaja. Harga sebenar selepas ukuran dan pemeriksaan tapak.</div></div></div><div class="actions" style="margin-top:12px"><button class="btn red" onclick="waEstimate()">Hantar Anggaran ke WhatsApp ›</button><button class="btn green" onclick="show('catalog')">Lihat Katalog</button></div></div></section>
+
+
+<section id="booking" class="screen">
+  <div class="booking-hero">
+    <div class="booking-overlay">
+      <div class="booking-eyebrow">TEMPAH SEKARANG</div>
+      <h1>BOOKING<br><span>UKURAN & KONSULTASI</span></h1>
+      <p>Isi maklumat di bawah dan kami akan hubungi anda untuk pengesahan temujanji.</p>
+      <div class="booking-benefits">
+        <div><b>◉</b><span>Pengukuran<br>Percuma</span></div>
+        <div><b>▱</b><span>Nasihat<br>Percuma</span></div>
+        <div><b>♢</b><span>Servis<br>Profesional</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap booking-wrap">
+    <div class="booking-card">
+      <div class="booking-card-head">
+        <h2>📅 Borang Booking</h2>
+        <span>Tempah sekarang, kami urus selebihnya!</span>
+      </div>
+      <div class="booking-fields">
+        <div class="field"><label>Nama Penuh *</label><input id="bkName" type="text" placeholder="Contoh: Ahmad bin Ali"></div>
+        <div class="field"><label>No. Telefon / WhatsApp *</label><input id="bkPhone" type="tel" placeholder="Contoh: 012-345 6789"></div>
+        <div class="field"><label>Jenis Kabinet *</label><select id="bkType"><option value="">Pilih jenis kabinet</option><option>Kabinet Dapur</option><option>Almari Bilik</option><option>Rak TV</option><option>Panel Dinding</option><option>Bawah Tangga</option><option>Rak Display</option></select></div>
+        <div class="field"><label>Material *</label><select id="bkMaterial"><option>Melamine</option><option>Laminate Formica</option></select></div>
+<div class="field full" style="margin-top:8px">
+  <div style="padding:12px;border:1px solid #e3e3e3;border-radius:10px;background:#fafafa">
+    <div style="font-weight:900;margin-bottom:8px">📚 KATALOG WARNA</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <a href="https://mieco.com.my/product/mieco-decorative-mfc/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:9px 12px;border-radius:8px;background:#222;color:#fff;text-decoration:none;font-weight:800;font-size:12px">Melamine — Lihat Katalog</a>
+      <a href="https://dgtango-hpl.com/products-2021/" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:9px 12px;border-radius:8px;background:#222;color:#fff;text-decoration:none;font-weight:800;font-size:12px">Formica Laminate — Lihat Katalog</a>
+    </div>
+  </div>
+</div>
+        <div class="field full"><label>Ukuran *</label><input id="bkMeasurement" type="text" placeholder="Contoh: 20 kaki selari / 10 kaki × 7 kaki"></div>
+
+        <div class="field full"><label>🎨 Warna Kabinet *</label><div class="color-picker-box"><div class="color-grid">
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Putih','#FFFFFF')"><div class="swatch" style="background:#FFFFFF"></div>Putih</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Hitam','#111111')"><div class="swatch" style="background:#111111"></div>Hitam</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Kelabu','#808080')"><div class="swatch" style="background:#808080"></div>Kelabu</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Charcoal','#333333')"><div class="swatch" style="background:#333333"></div>Charcoal</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Cream / Beige','#E8DCC8')"><div class="swatch" style="background:#E8DCC8"></div>Cream</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Coklat Kayu','#8B5A2B')"><div class="swatch" style="background:#8B5A2B"></div>Coklat</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Natural Kayu','#C89B6D')"><div class="swatch" style="background:#C89B6D"></div>Natural</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Merah','#D71920')"><div class="swatch" style="background:#D71920"></div>Merah</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Biru','#2F6DB2')"><div class="swatch" style="background:#2F6DB2"></div>Biru</button>
+          <button type="button" class="color-choice" onclick="selectCabinetColor(this,'Hijau','#3C7A57')"><div class="swatch" style="background:#3C7A57"></div>Hijau</button>
+        </div><div class="color-custom"><input id="bkColorCustom" type="color" value="#D9D9D9" onchange="selectCustomCabinetColor(this.value)"><div><b>Warna lain</b><div class="muted">Pilih warna sendiri jika tiada dalam senarai.</div></div></div><div id="selectedColorText" class="color-selected">Belum pilih warna.</div><input id="bkColorName" type="hidden"><input id="bkColorHex" type="hidden"></div></div>
+        <div class="field full"><div class="catalog-color-fields"><div><label style="font-weight:900;display:block;margin-bottom:6px">🔖 Kod Warna Katalog *</label><input id="bkColorCode" type="text" placeholder="Contoh: MFC-1234 / F1234" autocomplete="off"></div><div><label style="font-weight:900;display:block;margin-bottom:6px">📝 Nama Warna (optional)</label><input id="bkColorCatalogName" type="text" placeholder="Contoh: Oak Brown" autocomplete="off"></div></div></div>
+        <div class="field"><label>Tarikh Pilihan *</label><input id="bkDate" type="date"></div>
+        <div class="field"><label>Masa Pilihan *</label><input id="bkTime" type="time"></div>
+        <div class="field"><label>Jumlah Deposit (RM) *</label><input id="bkDeposit" type="number" min="0" step="0.01" placeholder="Contoh: 500"></div>
+<div class="field"><label>Bukti Deposit *</label><input id="bkDepositProof" type="file" accept="image/*"></div>
+<div class="field full"><label>Alamat / Lokasi *</label><input id="bkAddress" type="text" placeholder="Contoh: Taman Seri Indah, Ipoh, Perak"></div>
+        <div class="field full"><label>Catatan Tambahan</label><div class="field full"><textarea id="bkNote" rows="3" placeholder="Contoh: Nak kabinet bentuk L, warna kelabu, dll."></textarea></div>
+      </div>div class="field full">
+      <label>📸 Gambar Ruang / Rujukan</label>
+      <input id="bkReferenceImages" type="file" accept="image/*" multiple>
+      <div id="referenceImageList" style="margin-top:12px;display:grid;gap:10px"></div>
+      <div class="booking-accessories">
+        <h3>4. Tambahan Aksesori <span>(Pilihan)</span></h3>
+        <p>Pilih jika diperlukan. Harga aksesori akan disahkan oleh pihak Saujana Sejati Ent.</p>
+        <div class="acc-grid">
+          <label><input type="checkbox" class="acc" value="Laci tambahan"> Laci tambahan</label>
+          <label><input type="checkbox" class="acc" value="Magic corner"> Magic corner</label>
+          <label><input type="checkbox" class="acc" value="Rak botol"> Rak botol</label>
+          <label><input type="checkbox" class="acc" value="Lampu LED"> Lampu LED</label>
+          <label><input type="checkbox" class="acc" value="Rak pinggan"> Rak pinggan</label>
+          <label><input type="checkbox" class="acc" value="Aksesori lain" onchange="toggleOtherAccessory(this)"> Aksesori lain</label>
+          <label><input type="checkbox" class="acc" value="Rak rempah"> Rak rempah</label>
+        </div>
+        <div id="otherAccessoryBox" style="display:none;margin-top:12px">
+          <input id="otherAccessory" type="text" placeholder="Sila nyatakan item lain...">
+        </div>
+      </div>
+
+      <button class="booking-wa" type="button" onclick="sendBooking()">☘ Hantar Booking melalui WhatsApp <span>›</span></button>
+      <div class="booking-safe">🔒 Maklumat anda selamat dengan kami dan hanya digunakan untuk tujuan temujanji.</div>
+    </div>
+  </div>
+  <div class="booking-footer"><img src="logo-saujana-sejati.jpg"><div><b>100% Bumiputera</b><small>Kerja Kemas & Berkualiti</small></div><div><b>Servis Profesional</b><small>Kepuasan Pelanggan Keutamaan</small></div></div>
+</section>
+
+<div id="preview" class="modal"><div class="modal-card"><div class="modal-head"><b id="previewName">Preview</b><button class="close" onclick="closePreview()">Tutup</button></div><img id="previewImg" class="preview-img"></div></div>
+<nav class="nav"><button id="n1" class="active" onclick="show('home')"><span class="navico">⌂</span>Home</button><button id="n2" onclick="show('catalog')"><span class="navico">▣</span>Katalog</button><button id="n3" onclick="show('estimate')"><span class="navico">▤</span>Anggaran</button><button id="n4" onclick="show('booking')"><span class="navico">▣</span>Booking</button></nav>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://wvxaiojnxwzcdrczbdup.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_F_JX1g6axQQBZUJTVRCqUA_fEc5YsA2";
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const CATALOG=[['Kabinet Dapur','kabinet-dapur-01.jpg'],['Kabinet Dapur','kabinet-dapur-02.jpg'],['Kabinet Dapur','kabinet-dapur-03.jpg'],['Kabinet Dapur','kabinet-dapur-04.jpg'],['Kabinet Dapur','kabinet-dapur-05.jpg'],['Kabinet Dapur','kabinet-dapur-06.jpg'],['Kabinet Dapur','kabinet-dapur-07.jpg'],['Rak TV','rak-tv-01.jpg'],['Rak TV','rak-tv-02.jpg'],['Rak TV','rak-tv-03.jpg'],['Rak TV','rak-tv-04.jpg'],['Almari Bilik','almari-bilik-01.jpg'],['Almari Bilik','almari-bilik-02.jpg'],['Almari Bilik','almari-bilik-03.jpg'],['Panel Dinding','panel-dinding-01.jpg'],['Bawah Tangga','bawah-tangga-01.jpg'],['Rak Display','rak-display-01.jpg'],['Rak Display','rak-display-02.jpg']];
+const MATERIALS={Melamine:{lower:150,upperStandard:240,upperCeiling:270},Formica:{lower:190,upperStandard:330,upperCeiling:370}};
+function money(n){return 'RM '+Number(n||0).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}
+
+function getAgentSlug(){
+  const parts=window.location.pathname.split('/').filter(Boolean).map(x=>decodeURIComponent(x).toLowerCase().trim());
+  const i=parts.lastIndexOf('agent');
+  if(i>0 && parts[i-1]) return parts[i-1];
+
+  const params=new URLSearchParams(window.location.search);
+  return (params.get('agent')||'').toLowerCase().trim();
+}
+
+function normalizeAgentUrl(){
+  const params=new URLSearchParams(window.location.search);
+  const oldSlug=(params.get('agent')||'').toLowerCase().trim();
+  if(oldSlug){
+    const basePath='/Saujana-Sejati-Customer/';
+    const clean=basePath+encodeURIComponent(oldSlug)+'/agent';
+    window.history.replaceState({},'',clean);
+  }
+}
+
+async function wa(t){
+  const slug=getAgentSlug();
+  let phone='601113232186';
+
+  if(slug){
+    const {data}=await supabaseClient
+      .from('agents')
+      .select('phone')
+      .eq('slug',slug)
+      .eq('active',true)
+      .maybeSingle();
+
+    if(data?.phone){
+      phone=String(data.phone).replace(/[^0-9]/g,'');
+      if(phone.startsWith('0')) phone='60'+phone.slice(1);
+      else if(!phone.startsWith('60')) phone='60'+phone;
+    }
+  }
+
+  window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(t),'_blank');
+}
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));const n={home:'n1',catalog:'n2',estimate:'n3',booking:'n4'}[id];if(n)document.getElementById(n).classList.add('active');window.scrollTo(0,0);if(id==='catalog')renderCatalog('Semua');if(id==='estimate')updateForm()}
+function openCatalog(cat){show('catalog');renderCatalog(cat)}
+function renderCatalog(cat){const g=document.getElementById('catalogGrid');g.innerHTML='';CATALOG.filter(x=>cat==='Semua'||x[0]===cat).forEach(x=>{const d=document.createElement('div');d.className='item';const img=document.createElement('img');img.src=x[1];img.onclick=()=>preview(x[1],x[0]);const name=document.createElement('div');name.textContent=x[0];d.append(img,name);g.appendChild(d)})}
+function preview(src,name){document.getElementById('previewImg').src=src;document.getElementById('previewName').textContent=name;document.getElementById('preview').classList.add('show')}function closePreview(){document.getElementById('preview').classList.remove('show')}
+function updateForm(){const t=document.getElementById('type').value,m=document.getElementById('material');m.innerHTML=Object.keys(MATERIALS).map(x=>'<option>'+x+'</option>').join('');let fields='';if(t==='lower'){fields='<div class="field"><label>Sekaki selari</label><input id="l" type="number" min="0" step="0.1" oninput="calcEstimate()" placeholder="Contoh 10"></div>';}else if(t==='upper'){fields='<div class="field"><label>Jenis kabinet atas</label><select id="upperHeight" onchange="calcEstimate()"><option value="standard">Standard</option><option value="ceiling">Sampai siling</option></select></div><div class="field"><label>Sekaki selari</label><input id="l" type="number" min="0" step="0.1" oninput="calcEstimate()" placeholder="Contoh 10"></div>';}else{fields='<div class="field"><label>Lebar (kaki)</label><input id="w" type="number" min="0" step="0.1" oninput="calcEstimate()" placeholder="Contoh 10"></div><div class="field"><label>Tinggi (kaki)</label><input id="h" type="number" min="0" step="0.1" oninput="calcEstimate()" placeholder="Contoh 7"></div>'; }document.getElementById('measureFields').innerHTML=fields;m.onchange=calcEstimate;calcEstimate()}
+function calcEstimate(){const t=document.getElementById('type').value,m=document.getElementById('material').value||'Melamine';let r=null,a=0;if(t==='lower'){r=MATERIALS[m].lower;a=+document.getElementById('l')?.value||0;}else if(t==='upper'){r=document.getElementById('upperHeight')?.value==='ceiling'?MATERIALS[m].upperCeiling:MATERIALS[m].upperStandard;a=+document.getElementById('l')?.value||0;}else{document.getElementById('estimatePrice').textContent='Harga akan diberikan selepas ukuran';return;}document.getElementById('estimatePrice').textContent=money(a*r)}
+function waEstimate(){const t=document.getElementById('type').value,m=document.getElementById('material').value,price=document.getElementById('estimatePrice').textContent;const labels={lower:'Kabinet Dapur Bawah',upper:'Kabinet Dapur Atas',tv:'Kabinet TV',ward:'Almari Bilik'};const u=(t==='lower')?((document.getElementById('l')?.value||0)+' kaki selari'):((t==='upper')?((document.getElementById('l')?.value||0)+' kaki selari, '+(document.getElementById('upperHeight')?.value==='ceiling'?'sampai siling':'standard')):((document.getElementById('w')?.value||0)+' x '+(document.getElementById('h')?.value||0)+' kaki'));wa('Salam Saujana Sejati Ent, saya nak semak anggaran.\nJenis: '+labels[t]+'\nMaterial: '+m+'\nUkuran: '+u+'\nAnggaran: '+price+'\nAksesori: '+(getSelectedAccessories().join(', ')||'Tiada')+'\nSaya ingin dapatkan maklumat lanjut.')}
+updateForm();renderCatalog('Semua');loadActiveHomepageVideo();
+
+function selectCabinetColor(btn,name,hex){
+  document.querySelectorAll('.color-choice').forEach(x=>x.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('bkColorName').value=name;
+  document.getElementById('bkColorHex').value=hex;
+  document.getElementById('bkColorCustom').value=hex;
+  document.getElementById('selectedColorText').innerHTML='Warna dipilih: <b>'+name+'</b> <span style="display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:-3px;background:'+hex+';border:1px solid #aaa;margin-left:4px"></span> '+hex;
+}
+function selectCustomCabinetColor(hex){
+  document.querySelectorAll('.color-choice').forEach(x=>x.classList.remove('selected'));
+  document.getElementById('bkColorName').value='Warna Pilihan';
+  document.getElementById('bkColorHex').value=hex.toUpperCase();
+  document.getElementById('selectedColorText').innerHTML='Warna dipilih: <b>Warna Pilihan</b> <span style="display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:-3px;background:'+hex+';border:1px solid #aaa;margin-left:4px"></span> '+hex.toUpperCase();
+}
+async function sendBooking(){
+  const name=document.getElementById('bkName').value.trim();
+  const phone=document.getElementById('bkPhone').value.trim();
+  const type=document.getElementById('bkType').value;
+  const material=document.getElementById('bkMaterial').value;
+  const colorName=document.getElementById('bkColorName').value;
+  const colorHex=document.getElementById('bkColorHex').value;
+  const colorCode=document.getElementById('bkColorCode').value.trim();
+  const colorCatalogName=document.getElementById('bkColorCatalogName').value.trim();
+  const measurement=document.getElementById('bkMeasurement').value.trim();
+  const date=document.getElementById('bkDate').value;
+  const time=document.getElementById('bkTime').value;
+  const address=document.getElementById('bkAddress').value.trim();
+  const note=document.getElementById('bkNote').value.trim();
+  const deposit=document.getElementById('bkDeposit').value;
+  const depositProof=document.getElementById('bkDepositProof').files[0];
+  const accessories=getSelectedAccessories();
+
+  if(!name||!phone||!type||!measurement||!date||!time||!address||!colorName||!colorHex||!colorCode){
+    alert('Sila lengkapkan semua ruangan bertanda * termasuk pilihan warna dan kod katalog.');
+    return;
+  }
+
+  if(!deposit||Number(deposit)<=0){
+    alert('Sila masukkan jumlah deposit.');
+    return;
+  }
+
+  if(!depositProof){
+    alert('Sila upload bukti deposit.');
+    return;
+  }
+
+  let depositProofPath=null;
+
+  const btn=document.querySelector('.booking-wa');
+  const oldText=btn.innerHTML;
+
+  btn.disabled=true;
+  btn.innerHTML='⏳ Menyimpan booking...';
+
+  try{
+    const ext=(depositProof.name.split('.').pop()||'jpg')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g,'');
+
+    const filePath='customer/'+crypto.randomUUID()+'.'+(ext||'jpg');
+
+    const {error:uploadError}=await supabaseClient
+      .storage
+      .from('deposit-proofs')
+      .upload(filePath,depositProof,{
+        contentType:depositProof.type||'image/jpeg',
+        upsert:false
+      });
+
+    if(uploadError) throw uploadError;
+
+    depositProofPath=filePath;
+
+    const bookingId=crypto.randomUUID();
+
+    const payload={
+      id:bookingId,
+      customer_name:name,
+      phone:phone,
+      cabinet_type:type,
+      material:material,
+      color_name:colorCatalogName||colorName,
+      color_hex:colorHex,
+      color_code:colorCode,
+      measurement:measurement,
+      booking_date:date,
+      booking_time:time,
+      address:address,
+      notes:note||null,
+      accessories:accessories,
+      estimated_price:null,
+      deposit_amount:Number(deposit)||0,
+      deposit_proof_path:depositProofPath,
+      status:'baru',
+      source:'customer_web'
+    };
+
+    const {error}=await supabaseClient
+      .from('bookings')
+      .insert([payload]);
+
+    if(error) throw error;
+
+    const referenceFiles=Array.from(document.getElementById('bkReferenceImages')?.files||[]);
+    const referenceCaptions=Array.from(document.querySelectorAll('.reference-caption')).map(x=>x.value.trim());
+    const referenceErrors=[];
+
+    for(let i=0;i<referenceFiles.length;i++){
+      const file=referenceFiles[i];
+      try{
+        const refExt=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+        const refPath='booking/'+bookingId+'/'+crypto.randomUUID()+'.'+refExt;
+        const {error:refUploadError}=await supabaseClient.storage.from('customer-reference-images').upload(refPath,file,{contentType:file.type||'image/jpeg',upsert:false});
+        if(refUploadError) throw refUploadError;
+        const {error:refRowError}=await supabaseClient.from('booking_reference_images').insert([{booking_id:bookingId,image_path:refPath,caption:referenceCaptions[i]||null}]);
+        if(refRowError) throw refRowError;
+      }catch(refErr){
+        console.error('Reference image failed:',refErr);
+        referenceErrors.push(refErr.message||'Gagal simpan gambar');
+      }
+    }
+
+    const msg='Salam Saujana Sejati Ent, saya ingin membuat booking ukuran & konsultasi.\n\n'+
+      'Nama: '+name+'\n'+
+      'No. WhatsApp: '+phone+'\n'+
+      'Jenis kabinet: '+type+'\n'+
+      'Material: '+material+'\n'+
+      'Warna: '+(colorCatalogName||colorName)+' ('+colorHex+')\n'+
+      'Kod Warna Katalog: '+colorCode+'\n'+
+      'Ukuran: '+measurement+'\n'+
+      'Tarikh: '+date+'\n'+
+      'Masa: '+time+'\n'+
+      'Alamat/Lokasi: '+address+'\n'+
+      'Jumlah Deposit: RM '+Number(deposit).toFixed(2)+'\n'+
+      'Bukti Deposit: Telah dimuat naik melalui website\n'+
+      'Aksesori: '+(accessories.join(', ')||'-')+'\n'+
+      'Catatan: '+(note||'-')+'\n\n'+
+      'Booking saya sudah dihantar melalui website. Mohon sahkan temujanji dan penerimaan deposit. Terima kasih.';
+
+    if(referenceErrors.length){
+      alert('Booking berjaya dihantar, tetapi gambar rujukan ada yang gagal disimpan.\n\n'+referenceErrors.join('\n'));
+    }else{
+      alert('Booking berjaya dihantar! Terima kasih.');
+    }
+    wa(msg);
+
+  }catch(err){
+    console.error(err);
+    alert(
+      'Booking belum berjaya disimpan. Sila cuba lagi.\n\nRalat: '+
+      (err.message||'Tidak diketahui')
+    );
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML=oldText;
+  }
+}
+document.getElementById('bkReferenceImages').addEventListener('change', function(){
+  const list=document.getElementById('referenceImageList');
+  list.innerHTML='';
+
+  Array.from(this.files).forEach(file=>{
+    const reader=new FileReader();
+
+    reader.onload=function(e){
+      const box=document.createElement('div');
+      box.innerHTML=`
+        <img src="${e.target.result}" style="width:100%;max-width:300px;border-radius:10px;">
+        <input type="text" class="reference-caption" placeholder="Contoh: Ini keluasan dapur yang saya nak buat" style="width:100%;margin-top:8px;padding:10px;">
+      `;
+      list.appendChild(box);
+    };
+
+    reader.readAsDataURL(file);
+  });
+});
+  function getSelectedAccessories(){
+  const items = Array.from(document.querySelectorAll('.acc:checked')).map(x=>x.value);
+  const other = document.getElementById('otherAccessory');
+  if(other && other.value.trim() && document.querySelector('.acc[value="Aksesori lain"]:checked')){
+    items.push('Aksesori lain: '+other.value.trim());
+  }
+  return items;
+}
+function toggleOtherAccessory(el){
+  const box=document.getElementById('otherAccessoryBox');
+  if(box) box.style.display=el.checked?'block':'none';
+}
+
+async function loadActiveHomepageVideo(){
+  const section=document.getElementById('homeVideoDynamic');
+  const player=document.getElementById('homeVideoPlayer');
+  if(!section||!player)return;
+
+  const showVideo=(url,title,desc)=>{
+    if(!url)return false;
+    player.src=url;
+    section.style.display='block';
+    player.load();
+    return true;
+  };
+
+  try{
+    const {data,error}=await supabaseClient
+      .from('homepage_videos')
+      .select('title,description,storage_path')
+      .eq('is_active',true)
+      .order('created_at',{ascending:false})
+      .limit(1)
+      .maybeSingle();
+
+    if(!error&&data?.storage_path){
+      const publicUrl=supabaseClient.storage
+        .from('homepage-videos')
+        .getPublicUrl(data.storage_path)?.data?.publicUrl;
+      if(showVideo(publicUrl,data.title,data.description))return;
+    }
+  }catch(e){
+    console.error('Homepage video Supabase:',e);
+  }
+
+  // Fallback: video yang diletakkan terus dalam repo Customer/GitHub.
+  const fallbackUrl='Promo%20Video%2001.MP4';
+  showVideo(fallbackUrl,'Promo Video 01','Video promosi Saujana Sejati Ent');
+}
+</script></body></html>
